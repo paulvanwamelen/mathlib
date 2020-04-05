@@ -6,7 +6,7 @@ import algebra.commute analysis.normed_space.basic analysis.specific_limits
 
 instance nonempty_monoid {M : Type*} [monoid M] : nonempty M := ⟨1⟩
 
-open lattice set filter
+open set filter
 open_locale classical topological_space
 
 lemma real.mul_csupr {ι : Type*} [nonempty ι] {f : ι → ℝ} (h : bdd_above (range f))
@@ -23,19 +23,18 @@ structure quasi_mul_add_hom (M : Type*) [monoid M] (V : Type*) [normed_group V] 
 
 namespace quasi_mul_add_hom
 
-variables {M : Type*} [mM : monoid M] {V : Type*} [ngV : normed_group V]
-include mM ngV
+variables {M : Type*} [monoid M] {V : Type*} [normed_group V]
+
+instance : has_coe_to_fun (quasi_mul_add_hom M V) :=
+⟨λ _, M → V, quasi_mul_add_hom.to_fun⟩
 
 def mk' (f : M → V) (C : ℝ) (hC : ∀ x y, dist (f (x * y)) (f x + f y) ≤ C) :
   quasi_mul_add_hom M V :=
 ⟨f, C, hC⟩
 
-variables {mM ngV}
-
-instance : has_coe_to_fun (quasi_mul_add_hom M V) :=
-⟨λ _, M → V, quasi_mul_add_hom.to_fun⟩
-
 lemma mk_apply (f : M → V) (h x) : (quasi_mul_add_hom.mk f h : M → V) x = f x := rfl
+
+lemma mk'_apply (f : M → V) (C hC x) : (quasi_mul_add_hom.mk' f C hC : M → V) x = f x := rfl
 
 lemma coe_inj ⦃f g : quasi_mul_add_hom M V⦄ (H : (f : M → V) = g) : f = g :=
 by { cases f, cases g, cases H, refl }
@@ -67,6 +66,15 @@ le_trans dist_nonneg (f.map_mul_ineq 1 1)
 def nnnorm_cbd : nnreal := ⟨f.norm_cbd, f.norm_cbd_nonneg⟩
 
 lemma coe_nnnorm_cbd : (f.nnnorm_cbd : ℝ) = f.norm_cbd := rfl
+
+def comp_hom {N : Type*} [monoid N] (g : N →* M) : quasi_mul_add_hom N V :=
+mk' (λ x, f (g x)) f.norm_cbd $ λ x y, by simpa only [g.map_mul] using f.map_mul_ineq (g x) (g y)
+
+@[simp] lemma comp_hom_apply {N : Type*} [monoid N] (g : N →* M) (x) : f.comp_hom g x = f (g x) := rfl
+
+lemma norm_cbd_comp_hom_le {N : Type*} [monoid N] (g : N →* M) :
+  (f.comp_hom g).norm_cbd ≤ f.norm_cbd :=
+norm_cbd_mk'_le _ _ _
 
 instance : add_comm_group (quasi_mul_add_hom M V) :=
 { add := λ f g, mk' (λ x, f x + g x) (f.norm_cbd + g.norm_cbd) $
@@ -105,7 +113,7 @@ lemma edist_le_edist (x) : edist (f x) (g x) ≤ edist f g :=
 le_supr _ x
 
 lemma lipschitz_with_eval (x : M) : lipschitz_with 1 (λ f : quasi_mul_add_hom M V, f x) :=
-lipschitz_with.edist_mk_one $ λ f g, le_supr _ x
+lipschitz_with.of_edist_le $ λ f g, le_supr _ x
 
 open filter
 lemma cbd_closed_ball_is_complete [complete_space V] (C : ℝ) :
@@ -178,8 +186,6 @@ def mk' (f : ℕ → V) (C : ℝ) (hC : ∀ k l, dist (f (k + l)) (f k + f l) �
   quasi_arith_seq V :=
 ⟨f, C, hC⟩
 
-variable {ngV}
-
 instance : has_coe_to_fun (quasi_arith_seq V) := ⟨λ _, ℕ → V, quasi_mul_add_hom.to_fun⟩
 instance : add_comm_group (quasi_arith_seq V) := quasi_mul_add_hom.add_comm_group
 instance : emetric_space (quasi_arith_seq V) := quasi_mul_add_hom.emetric_space
@@ -224,7 +230,7 @@ lemma arg_rescale_def (n k : ℕ) : f.arg_rescale n k = f (n * k) := rfl
 lemma arg_rescale_lipschitz (n : ℕ) :
   lipschitz_with 1 (λ f : quasi_arith_seq V, f.arg_rescale n) :=
 begin
-  refine lipschitz_with.edist_mk_one (λ f g, _),
+  refine lipschitz_with.of_edist_le (λ f g, _),
   simp only [edist_def],
   exact supr_le_supr2 (λ k : ℕ, ⟨n * k, le_refl _⟩)
 end
@@ -259,7 +265,7 @@ begin
   use nnreal.two_inv_lt_one,
   convert (smul_lipschitz_with _).comp (arg_rescale_lipschitz 2),
   apply nnreal.eq,
-  rw [mul_one, coe_nnnorm, real.norm_eq_abs, abs_of_pos (inv_pos $ @two_pos ℝ _)],
+  rw [mul_one, coe_nnnorm, real.norm_eq_abs, abs_of_pos (inv_pos.2 $ @two_pos ℝ _)],
   refl
 end
 
@@ -268,16 +274,16 @@ begin
   rw [edist_def, supr_le_iff],
   intro k,
   rw [zoom2, smul_def, arg_rescale_def, edist_nndist, ← ennreal.coe_inv_two, ← ennreal.coe_mul,
-    ennreal.coe_le_coe, ← nnreal.coe_le, nnreal.coe_mul, ← dist_nndist, coe_nnnorm_cbd],
+    ennreal.coe_le_coe, ← nnreal.coe_le_coe, nnreal.coe_mul, ← dist_nndist, coe_nnnorm_cbd],
   conv { congr, congr,
-    rw [← one_smul ℝ (f k), ← mul_inv_cancel two_ne_zero, two_mul, add_smul, ← smul_add] },
-  rw [two_mul, dist_smul, real.norm_eq_abs, abs_of_pos (inv_pos $ @two_pos ℝ _), dist_comm],
+    rw [← one_smul ℝ (f k), ← mul_inv_cancel (@two_ne_zero ℝ _), two_mul, add_smul, ← smul_add] },
+  rw [two_mul, dist_smul, real.norm_eq_abs, abs_of_pos (inv_pos.2 $ @two_pos ℝ _), dist_comm],
   exact mul_le_mul_of_nonneg_left (f.map_add_ineq _ _) (inv_nonneg.2 $ le_of_lt two_pos)
 end
 
 lemma norm_cbd_zoom2_le : f.zoom2.norm_cbd ≤ 2⁻¹ * f.norm_cbd :=
 begin
-  rw [zoom2, norm_cbd_smul, ← abs_of_pos (inv_pos $ @two_pos ℝ _), abs_abs],
+  rw [zoom2, norm_cbd_smul, ← abs_of_pos (inv_pos.2 $ @two_pos ℝ _), abs_abs],
   exact mul_le_mul_of_nonneg_left (f.norm_cbd_arg_rescale_le _) (abs_nonneg _)
 end
 
@@ -301,15 +307,14 @@ include csV
 
 def slope (f : quasi_arith_seq V) : V :=
 begin
-  refine zoom2_contracting.efixed_point' _ f (lt_of_le_of_lt f.edist_zoom2_le _)
-    {g | norm_cbd g ≤ f.norm_cbd} _ _ _ 1,
-  { exact ennreal.mul_lt_top
-      (ennreal.lt_top_iff_ne_top.2 (ennreal.inv_ne_top.2 ennreal.two_ne_zero))
-      ennreal.coe_lt_top },
-  { rw set.mem_set_of_eq },
-  { exact cbd_closed_ball_is_complete _ },
+  have : maps_to zoom2 {g : quasi_arith_seq V | norm_cbd g ≤ f.norm_cbd}
+    {g | norm_cbd g ≤ f.norm_cbd},
   { intros g hg,
-    exact le_trans g.norm_cbd_zoom2_le' hg }
+    exact le_trans g.norm_cbd_zoom2_le' hg },
+  refine (zoom2_contracting.restrict this).efixed_point' _ (cbd_closed_ball_is_complete _)
+    this f (le_refl $ norm_cbd f) (lt_of_le_of_lt f.edist_zoom2_le _) 1,
+  exact ennreal.mul_lt_top (ennreal.lt_top_iff_ne_top.2 (ennreal.inv_ne_top.2 ennreal.two_ne_zero))
+    ennreal.coe_lt_top
 end
 
 lemma slope_eq_of_edist_lt_top (h : edist f g < ⊤) :
@@ -318,7 +323,7 @@ begin
   rw [slope, slope],
   refine congr_fun (congr_arg _ _) 1,
   apply contracting_with.efixed_point_eq_of_edist_lt_top',
-  exact h
+  exacts [zoom2_contracting, h]
 end
 
 lemma slope_eq_of_dist_le (C : ℝ) (h : ∀ k, dist (f k) (g k) ≤ C) :
@@ -327,7 +332,7 @@ begin
   apply slope_eq_of_edist_lt_top,
   refine lt_of_le_of_lt _ (ennreal.coe_lt_top : ↑(nnreal.of_real C) < ⊤),
   simp only [edist_def, supr_le_iff, edist_nndist, ennreal.coe_le_coe,
-    nnreal.coe_le.symm, (dist_nndist _ _).symm],
+    ← nnreal.coe_le_coe, ← dist_nndist],
   intro n,
   exact le_trans (h n) (nnreal.le_coe_of_real C)
 end
@@ -412,16 +417,21 @@ lemma approx_units_inv (x : units M) : f.approx (x⁻¹ : units M) = - f.approx 
 eq_neg_iff_add_eq_zero.2 $ by simpa only [x.inv_mul, f.approx_one]
   using (f.approx_mul_of_commute (commute.refl x).units_coe.units_inv_left).symm
 
+lemma dist_le_of_semiconj {a x y : M} (h : semiconj_by a x y) :
+  dist (f x) (f y) ≤ 2 * f.norm_cbd :=
+begin
+  rw [two_mul, ← dist_add_left (f a)],
+  refine le_trans (dist_triangle _ (f (a * x)) _)
+    (add_le_add _ _),
+  { rw [dist_comm], apply f.map_mul_ineq },
+  { rw [h.eq, add_comm], apply f.map_mul_ineq }
+end
+
 lemma approx_eq_of_semiconj {a x y : M} (h : semiconj_by a x y) :
   f.approx x = f.approx y :=
 begin
   refine quasi_arith_seq.slope_eq_of_dist_le _ _ (2 * f.norm_cbd) (λ n, _),
-  simp only [on_powers_def, two_mul],
-  rw [← dist_add_left (f a)],
-  refine le_trans (dist_triangle _ (f (a * x^n)) _)
-    (add_le_add _ _),
-  { rw [dist_comm], apply f.map_mul_ineq },
-  { rw [(h.pow_right n).eq, add_comm], apply f.map_mul_ineq }
+  exact f.dist_le_of_semiconj (h.pow_right n)
 end
 
 lemma dist_approx_le (x : M) : dist (f x) (f.approx x) ≤ f.norm_cbd :=
@@ -441,7 +451,7 @@ lemma tendsto_approx (x : M) :
   tendsto (λ n:ℕ, (n:ℝ)⁻¹ • f (x^n)) at_top (𝓝 $ f.approx x) :=
 begin
   refine tendsto_iff_dist_tendsto_zero.2 _,
-  refine tendsto_of_tendsto_of_tendsto_of_le_of_le
+  refine tendsto_of_tendsto_of_tendsto_of_le_of_le'
     tendsto_const_nhds (tendsto_const_div_at_top_nhds_0_nat f.norm_cbd) _ _,
   exact univ_mem_sets' (λ _, dist_nonneg),
   apply eventually.mono (mem_at_top 1),
