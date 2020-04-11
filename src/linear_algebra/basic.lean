@@ -334,31 +334,6 @@ rfl
 theorem comp_smul (g : M₂ →ₗ[R] M₃) (a : R) : g.comp (a • f) = a • (g.comp f) :=
 ext $ assume b, by rw [comp_apply, smul_apply, g.map_smul]; refl
 
-end comm_semiring
-
-section comm_ring
-variables [comm_ring R] [add_comm_group M] [add_comm_group M₂] [add_comm_group M₃]
-variables [semimodule R M] [semimodule R M₂] [semimodule R M₃]
-variables (f g : M →ₗ[R] M₂)
-include R
-
-
-
-/- Next definition fails. I have not been able to sort it out, even tweaking priorities
-as follows.
-
-local attribute [instance, priority 50] semiring.to_add_comm_monoid ring.to_add_comm_group
-
-local attribute [instance, priority 3000] add_comm_group.to_add_comm_monoid
-comm_ring.to_comm_semiring comm_semiring.to_semiring
-
-set_option trace.class_instances true
-
-set_option class.instance_max_depth 10
--/
-
-#exit
-
 /--
 The family of linear maps `M₂ → M` parameterised by `f ∈ M₂ → R`, `x ∈ M`, is linear in `f`, `x`.
 -/
@@ -373,7 +348,7 @@ def smul_rightₗ : (M₂ →ₗ[R] R) →ₗ[R] (M →ₗ[R] (M₂ →ₗ[R] M)
 @[simp] lemma smul_rightₗ_apply (f : M₂ →ₗ[R] R) (x : M) (c : M₂) :
   (smul_rightₗ : (M₂ →ₗ R) →ₗ M →ₗ M₂ →ₗ M) f x c = (f c) • x := rfl
 
-end comm_ring
+end comm_semiring
 
 end linear_map
 

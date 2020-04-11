@@ -157,13 +157,14 @@ instance semiring.to_semimodule [r : semiring α] : semimodule α α :=
 @[simp] lemma smul_eq_mul [semiring α] {a a' : α} : a • a' = a * a' := rfl
 
 /-- A ring homomorphism `f : α →+* β` defines a module structure by `r • x = f r * x`. -/
-def ring_hom.to_module [ring α] [ring β] (f : α →+* β) : semimodule α β :=
-semimodule.of_core
+def ring_hom.to_module [semiring α] [semiring β] (f : α →+* β) : semimodule α β :=
 { smul := λ r x, f r * x,
-  smul_add := λ r x y, by unfold has_scalar.smul; rw [mul_add],
-  add_smul := λ r s x, by unfold has_scalar.smul; rw [f.map_add, add_mul],
-  mul_smul := λ r s x, by unfold has_scalar.smul; rw [f.map_mul, mul_assoc],
-  one_smul := λ x, show f 1 * x = _, by rw [f.map_one, one_mul] }
+  smul_add := λ r x y, mul_add (f r) x y,
+  add_smul := λ r s x, by { unfold has_scalar.smul, rw [f.map_add, add_mul] },
+  mul_smul := λ r s x, by { unfold has_scalar.smul, rw [f.map_mul, mul_assoc] },
+  one_smul := λ x, show f 1 * x = _, by rw [f.map_one, one_mul],
+  zero_smul := λ x, by {unfold has_scalar.smul, rw [f.map_zero, zero_mul] },
+  smul_zero := λ r, mul_zero (f r) }
 
 class is_linear_map (α : Type u) {β : Type v} {γ : Type w}
   [semiring α] [add_comm_monoid β] [add_comm_monoid γ] [semimodule α β] [semimodule α γ]
