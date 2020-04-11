@@ -1625,12 +1625,7 @@ def congr_right (f : M₂ ≃ₗ[R] M₃) : (M →ₗ[R] M₂) ≃ₗ (M →ₗ 
 /-- If M and M₂ are linearly isomorphic then the two spaces of linear maps from M and M₂ to
 themselves are linearly isomorphic. -/
 def conj (e : M ≃ₗ[R] M₂) : (module.End R M) ≃ₗ[R] (module.End R M₂) :=
-begin
-  -- arrow_congr e e
-  sorry
-end
-
-#exit
+arrow_congr e e
 
 end comm_ring
 
