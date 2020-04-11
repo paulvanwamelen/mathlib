@@ -43,7 +43,7 @@ variables [semiring α] [add_comm_monoid β] [semimodule α β] (r s : α) (x y 
 
 theorem add_smul : (r + s) • x = r • x + s • x := semimodule.add_smul r s x
 variables (α)
-@[simp] theorem zero_smul : (0 : α) • x = 0 := semimodule.zero_smul α x
+@[simp] theorem zero_smul : (0 : α) • x = 0 := semimodule.zero_smul x
 
 variable {α}
 
@@ -168,8 +168,8 @@ semimodule.of_core
 class is_linear_map (α : Type u) {β : Type v} {γ : Type w}
   [semiring α] [add_comm_monoid β] [add_comm_monoid γ] [semimodule α β] [semimodule α γ]
   (f : β → γ) : Prop :=
-(add  : ∀x y, f (x + y) = f x + f y)
-(smul : ∀(c : α) x, f (c • x) = c • f x)
+(add [] : ∀ x y, f (x + y) = f x + f y)
+(smul [] : ∀ (c : α) x, f (c • x) = c • f x)
 
 structure linear_map (α : Type u) (β : Type v) (γ : Type w)
   [semiring α] [add_comm_monoid β] [add_comm_monoid γ] [semimodule α β] [semimodule α γ] :=
@@ -681,7 +681,7 @@ lemma sum_const' {α : Type*} (R : Type*) [ring R] {β : Type*}
   finset.sum s (λ (a : α), b) = (finset.card s : R) • b :=
 by rw [finset.sum_const, ← semimodule.smul_eq_smul]; refl
 
-variables {M : Type*} [decidable_linear_ordered_cancel_comm_monoid M]
+variables {M : Type*} [decidable_linear_ordered_cancel_add_comm_monoid M]
   {s : finset α} (f : α → M)
 
 theorem exists_card_smul_le_sum (hs : s.nonempty) :
