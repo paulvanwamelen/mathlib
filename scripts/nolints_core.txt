@@ -1,2 +1,2151 @@
 import .all
 run_cmd tactic.skip
+
+-- library/data/buffer.lean
+apply_nolint array.to_buffer doc_blame
+apply_nolint buffer doc_blame has_inhabited_instance
+apply_nolint buffer.append doc_blame
+apply_nolint buffer.append_array doc_blame
+apply_nolint buffer.append_list doc_blame
+apply_nolint buffer.append_string doc_blame
+apply_nolint buffer.drop doc_blame
+apply_nolint buffer.foldl doc_blame
+apply_nolint buffer.foreach doc_blame
+apply_nolint buffer.iterate doc_blame
+apply_nolint buffer.mem doc_blame
+apply_nolint buffer.nil doc_blame
+apply_nolint buffer.pop_back doc_blame
+apply_nolint buffer.push_back doc_blame
+apply_nolint buffer.read doc_blame
+apply_nolint buffer.read' doc_blame
+apply_nolint buffer.rev_iterate doc_blame
+apply_nolint buffer.reverse doc_blame
+apply_nolint buffer.size doc_blame
+apply_nolint buffer.take doc_blame
+apply_nolint buffer.take_right doc_blame
+apply_nolint buffer.to_array doc_blame
+apply_nolint buffer.to_list doc_blame
+apply_nolint buffer.to_string doc_blame
+apply_nolint buffer.write doc_blame
+apply_nolint buffer.write' doc_blame
+apply_nolint char_buffer doc_blame
+apply_nolint list.to_buffer doc_blame
+apply_nolint mk_buffer doc_blame
+apply_nolint string.to_char_buffer doc_blame
+
+-- library/data/dlist.lean
+apply_nolint dlist has_inhabited_instance
+
+-- library/init/algebra/classes.lean
+apply_nolint is_antisymm doc_blame
+apply_nolint is_associative doc_blame
+apply_nolint is_asymm doc_blame
+apply_nolint is_asymm_of_is_trans_of_is_irrefl instance_priority
+apply_nolint is_commutative doc_blame
+apply_nolint is_cond_left_inv doc_blame
+apply_nolint is_cond_right_inv doc_blame
+apply_nolint is_distinct doc_blame
+apply_nolint is_equiv doc_blame
+apply_nolint is_equiv.to_is_preorder instance_priority
+apply_nolint is_equiv.to_is_symm instance_priority
+apply_nolint is_idempotent doc_blame
+apply_nolint is_incomp_trans doc_blame
+apply_nolint is_irrefl doc_blame
+apply_nolint is_left_cancel doc_blame
+apply_nolint is_left_distrib doc_blame
+apply_nolint is_left_id doc_blame
+apply_nolint is_left_inv doc_blame
+apply_nolint is_left_null doc_blame
+apply_nolint is_linear_order doc_blame
+apply_nolint is_linear_order.to_is_partial_order instance_priority
+apply_nolint is_linear_order.to_is_total instance_priority
+apply_nolint is_partial_order doc_blame
+apply_nolint is_partial_order.to_is_antisymm instance_priority
+apply_nolint is_partial_order.to_is_preorder instance_priority
+apply_nolint is_per doc_blame
+apply_nolint is_per.to_is_symm instance_priority
+apply_nolint is_per.to_is_trans instance_priority
+apply_nolint is_preorder doc_blame
+apply_nolint is_preorder.to_is_refl instance_priority
+apply_nolint is_preorder.to_is_trans instance_priority
+apply_nolint is_refl doc_blame
+apply_nolint is_right_cancel doc_blame
+apply_nolint is_right_distrib doc_blame
+apply_nolint is_right_id doc_blame
+apply_nolint is_right_inv doc_blame
+apply_nolint is_right_null doc_blame
+apply_nolint is_strict_order doc_blame
+apply_nolint is_strict_order.to_is_irrefl instance_priority
+apply_nolint is_strict_order.to_is_trans instance_priority
+apply_nolint is_strict_total_order doc_blame
+apply_nolint is_strict_total_order.to_is_strict_weak_order instance_priority
+apply_nolint is_strict_total_order.to_is_trichotomous instance_priority
+apply_nolint is_strict_weak_order doc_blame
+apply_nolint is_strict_weak_order.to_is_incomp_trans instance_priority
+apply_nolint is_strict_weak_order.to_is_strict_order instance_priority
+apply_nolint is_strict_weak_order_of_is_total_preorder decidable_classical
+apply_nolint is_symm doc_blame
+apply_nolint is_symm_op doc_blame
+apply_nolint is_symm_op_of_is_commutative instance_priority
+apply_nolint is_symm_op_of_is_symm instance_priority
+apply_nolint is_total doc_blame
+apply_nolint is_total_preorder doc_blame
+apply_nolint is_total_preorder.to_is_total instance_priority
+apply_nolint is_total_preorder.to_is_trans instance_priority
+apply_nolint is_total_preorder_is_preorder instance_priority
+apply_nolint is_trans doc_blame
+apply_nolint is_trichotomous doc_blame
+apply_nolint lt_of_incomp_of_lt decidable_classical
+apply_nolint lt_of_lt_of_incomp decidable_classical
+apply_nolint strict_weak_order.equiv doc_blame
+apply_nolint strict_weak_order.esymm unused_arguments
+apply_nolint strict_weak_order.not_lt_of_equiv unused_arguments
+apply_nolint strict_weak_order.not_lt_of_equiv' unused_arguments
+
+-- library/init/algebra/field.lean
+apply_nolint algebra.div doc_blame
+apply_nolint division_ring doc_blame
+apply_nolint field doc_blame
+
+-- library/init/algebra/functions.lean
+apply_nolint abs doc_blame
+apply_nolint abs_nonneg ge_or_gt
+apply_nolint abs_pos_of_ne_zero ge_or_gt
+apply_nolint abs_pos_of_neg ge_or_gt
+apply_nolint abs_pos_of_pos ge_or_gt
+apply_nolint dist_bdd_within_interval unused_arguments
+apply_nolint max doc_blame
+apply_nolint min doc_blame
+apply_nolint tactic.interactive.min_tac doc_blame
+
+-- library/init/algebra/group.lean
+apply_nolint add_comm_group doc_blame
+apply_nolint add_comm_monoid doc_blame
+apply_nolint add_comm_semigroup doc_blame
+apply_nolint add_group doc_blame
+apply_nolint add_left_cancel_semigroup doc_blame
+apply_nolint add_monoid doc_blame
+apply_nolint add_neg_self def_lemma doc_blame
+apply_nolint add_right_cancel_semigroup doc_blame
+apply_nolint add_semigroup doc_blame
+apply_nolint algebra.sub doc_blame
+apply_nolint comm_group doc_blame
+apply_nolint comm_monoid doc_blame
+apply_nolint comm_semigroup doc_blame
+apply_nolint eq_of_add_eq_add_left def_lemma doc_blame
+apply_nolint eq_of_add_eq_add_right def_lemma doc_blame
+apply_nolint group doc_blame
+apply_nolint inv_mul_self def_lemma doc_blame
+apply_nolint left_cancel_semigroup doc_blame
+apply_nolint monoid doc_blame
+apply_nolint mul_inv_self def_lemma doc_blame
+apply_nolint neg_add_self def_lemma doc_blame
+apply_nolint right_cancel_semigroup doc_blame
+apply_nolint semigroup doc_blame
+apply_nolint transport_multiplicative_to_additive doc_blame
+apply_nolint transport_with_dict doc_blame
+
+-- library/init/algebra/norm_num.lean
+apply_nolint norm_num.add1 doc_blame
+apply_nolint norm_num.mul_div_helper unused_arguments
+apply_nolint norm_num.nonneg_bit0_helper ge_or_gt
+apply_nolint norm_num.nonneg_bit1_helper ge_or_gt
+apply_nolint norm_num.pos_bit0_helper ge_or_gt
+apply_nolint norm_num.pos_bit1_helper ge_or_gt
+
+-- library/init/algebra/order.lean
+apply_nolint decidable_linear_order doc_blame
+apply_nolint ge_trans ge_or_gt
+apply_nolint gt.trans def_lemma doc_blame ge_or_gt
+apply_nolint gt_irrefl ge_or_gt
+apply_nolint gt_of_ge_of_gt ge_or_gt
+apply_nolint gt_of_gt_of_ge ge_or_gt
+apply_nolint gt_trans ge_or_gt
+apply_nolint le_or_gt ge_or_gt
+apply_nolint lt.trans def_lemma doc_blame
+apply_nolint lt_iff_not_ge ge_or_gt
+apply_nolint lt_or_ge ge_or_gt
+apply_nolint lt_or_gt_of_ne ge_or_gt
+apply_nolint ne_iff_lt_or_gt ge_or_gt
+
+-- library/init/algebra/ordered_field.lean
+apply_nolint discrete_linear_ordered_field doc_blame
+apply_nolint discrete_linear_ordered_field.to_decidable_linear_ordered_comm_ring instance_priority
+apply_nolint discrete_linear_ordered_field.to_linear_ordered_field instance_priority
+apply_nolint exists_add_lt_and_pos_of_lt ge_or_gt
+apply_nolint ge_of_forall_ge_sub ge_or_gt
+apply_nolint linear_ordered_field doc_blame
+apply_nolint linear_ordered_field.to_field instance_priority
+apply_nolint linear_ordered_field.to_linear_ordered_ring instance_priority
+
+-- library/init/algebra/ordered_group.lean
+apply_nolint decidable_linear_ordered_add_comm_group doc_blame
+apply_nolint decidable_linear_ordered_cancel_add_comm_monoid doc_blame
+apply_nolint ordered_add_comm_group doc_blame
+apply_nolint ordered_cancel_add_comm_monoid doc_blame
+
+-- library/init/algebra/ordered_ring.lean
+apply_nolint decidable_linear_ordered_comm_ring doc_blame
+apply_nolint decidable_linear_ordered_semiring doc_blame
+apply_nolint four_pos ge_or_gt
+apply_nolint gt_of_mul_lt_mul_neg_left ge_or_gt
+apply_nolint linear_ordered_comm_ring doc_blame
+apply_nolint linear_ordered_ring doc_blame
+apply_nolint linear_ordered_semiring doc_blame
+apply_nolint mul_nonneg ge_or_gt
+apply_nolint mul_pos ge_or_gt
+apply_nolint mul_self_nonneg ge_or_gt
+apply_nolint ordered_ring doc_blame
+apply_nolint ordered_semiring doc_blame
+apply_nolint pos_and_pos_or_neg_and_neg_of_mul_pos ge_or_gt
+apply_nolint two_ge_one ge_or_gt
+apply_nolint two_gt_one ge_or_gt
+
+-- library/init/algebra/ring.lean
+apply_nolint add_mul def_lemma doc_blame
+apply_nolint comm_ring doc_blame
+apply_nolint comm_semiring doc_blame
+apply_nolint distrib doc_blame
+apply_nolint dvd.trans def_lemma doc_blame
+apply_nolint dvd_of_mul_left_eq def_lemma doc_blame
+apply_nolint dvd_of_mul_right_eq def_lemma doc_blame
+apply_nolint integral_domain doc_blame
+apply_nolint mul_add def_lemma doc_blame
+apply_nolint mul_sub def_lemma doc_blame
+apply_nolint mul_zero_class doc_blame
+apply_nolint no_zero_divisors doc_blame
+apply_nolint ring doc_blame
+apply_nolint semiring doc_blame
+apply_nolint sub_mul def_lemma doc_blame
+apply_nolint zero_ne_one_class doc_blame
+
+-- library/init/category/alternative.lean
+apply_nolint alternative doc_blame
+apply_nolint alternative.to_applicative instance_priority
+apply_nolint alternative.to_has_orelse instance_priority
+apply_nolint assert doc_blame
+apply_nolint failure doc_blame
+apply_nolint guardb doc_blame
+apply_nolint has_orelse doc_blame
+apply_nolint optional doc_blame
+
+-- library/init/category/applicative.lean
+apply_nolint applicative doc_blame
+apply_nolint applicative.to_functor instance_priority
+apply_nolint applicative.to_has_pure instance_priority
+apply_nolint applicative.to_has_seq instance_priority
+apply_nolint applicative.to_has_seq_left instance_priority
+apply_nolint applicative.to_has_seq_right instance_priority
+apply_nolint has_pure doc_blame
+apply_nolint has_seq doc_blame
+apply_nolint has_seq_left doc_blame
+apply_nolint has_seq_right doc_blame
+
+-- library/init/category/combinators.lean
+apply_nolint list.mfilter doc_blame
+apply_nolint list.mfirst doc_blame unused_arguments
+apply_nolint list.mfoldl doc_blame
+apply_nolint list.mfoldr doc_blame
+apply_nolint list.mmap doc_blame
+apply_nolint list.mmap' doc_blame
+apply_nolint mcond doc_blame
+apply_nolint mjoin doc_blame
+apply_nolint monad.cond doc_blame
+apply_nolint monad.filter doc_blame
+apply_nolint monad.foldl doc_blame
+apply_nolint monad.join doc_blame
+apply_nolint monad.mapm doc_blame
+apply_nolint monad.mapm' doc_blame
+apply_nolint monad.sequence doc_blame
+apply_nolint monad.sequence' doc_blame
+apply_nolint monad.unlessb doc_blame
+apply_nolint monad.whenb doc_blame
+apply_nolint mwhen doc_blame
+apply_nolint when doc_blame
+
+-- library/init/category/except.lean
+apply_nolint except doc_blame has_inhabited_instance
+apply_nolint except.bind doc_blame
+apply_nolint except.map doc_blame
+apply_nolint except.map_error doc_blame
+apply_nolint except.return doc_blame
+apply_nolint except.to_bool doc_blame
+apply_nolint except.to_option doc_blame
+apply_nolint except_t doc_blame has_inhabited_instance
+apply_nolint except_t.adapt doc_blame
+apply_nolint except_t.bind doc_blame
+apply_nolint except_t.bind_cont doc_blame
+apply_nolint except_t.catch doc_blame
+apply_nolint except_t.lift doc_blame
+apply_nolint except_t.monad_map doc_blame unused_arguments
+apply_nolint except_t.return doc_blame
+apply_nolint monad_except.orelse doc_blame
+apply_nolint monad_except_adapter fails_quickly
+apply_nolint monad_except_adapter_trans dangerous_instance instance_priority
+
+-- library/init/category/functor.lean
+apply_nolint functor doc_blame
+apply_nolint functor.map_const_rev doc_blame
+
+-- library/init/category/id.lean
+apply_nolint id_bind doc_blame
+
+-- library/init/category/lawful.lean
+apply_nolint control_laws_tac doc_blame
+apply_nolint is_lawful_applicative doc_blame
+apply_nolint is_lawful_applicative.to_is_lawful_functor instance_priority
+apply_nolint is_lawful_functor doc_blame
+apply_nolint is_lawful_monad doc_blame
+apply_nolint is_lawful_monad.to_is_lawful_applicative instance_priority
+
+-- library/init/category/lift.lean
+apply_nolint has_monad_lift_t_trans dangerous_instance instance_priority
+apply_nolint monad_functor_t_trans dangerous_instance instance_priority
+
+-- library/init/category/monad.lean
+apply_nolint has_bind doc_blame
+apply_nolint has_bind.and_then doc_blame
+apply_nolint has_bind.seq doc_blame
+apply_nolint monad doc_blame
+apply_nolint monad.to_applicative instance_priority
+apply_nolint monad.to_has_bind instance_priority
+apply_nolint return doc_blame
+
+-- library/init/category/monad_fail.lean
+apply_nolint match_failed doc_blame
+apply_nolint monad_fail doc_blame
+apply_nolint monad_fail_lift unused_arguments dangerous_instance instance_priority
+
+-- library/init/category/option.lean
+apply_nolint option_t doc_blame has_inhabited_instance
+apply_nolint option_t.bind doc_blame
+apply_nolint option_t.bind_cont doc_blame
+apply_nolint option_t.catch doc_blame
+apply_nolint option_t.fail doc_blame
+apply_nolint option_t.lift doc_blame
+apply_nolint option_t.monad_map doc_blame unused_arguments
+apply_nolint option_t.of_option doc_blame
+apply_nolint option_t.orelse doc_blame
+apply_nolint option_t.pure doc_blame
+
+-- library/init/category/reader.lean
+apply_nolint monad_reader_adapter fails_quickly
+apply_nolint monad_reader_adapter_trans dangerous_instance instance_priority
+apply_nolint monad_reader_trans dangerous_instance instance_priority
+apply_nolint reader doc_blame
+apply_nolint reader_t has_inhabited_instance
+apply_nolint reader_t.adapt doc_blame unused_arguments
+apply_nolint reader_t.bind doc_blame
+apply_nolint reader_t.failure doc_blame unused_arguments
+apply_nolint reader_t.lift doc_blame unused_arguments
+apply_nolint reader_t.monad_except unused_arguments
+apply_nolint reader_t.monad_map doc_blame unused_arguments
+apply_nolint reader_t.orelse doc_blame unused_arguments
+apply_nolint reader_t.pure doc_blame
+apply_nolint reader_t.read doc_blame
+
+-- library/init/category/state.lean
+apply_nolint get unused_arguments
+apply_nolint modify unused_arguments
+apply_nolint monad_state fails_quickly
+apply_nolint monad_state_adapter fails_quickly
+apply_nolint monad_state_adapter_trans dangerous_instance instance_priority
+apply_nolint monad_state_trans dangerous_instance instance_priority
+apply_nolint put unused_arguments
+apply_nolint state doc_blame
+apply_nolint state_t doc_blame has_inhabited_instance
+apply_nolint state_t.adapt doc_blame
+apply_nolint state_t.bind doc_blame
+apply_nolint state_t.failure doc_blame unused_arguments
+apply_nolint state_t.get doc_blame
+apply_nolint state_t.lift doc_blame
+apply_nolint state_t.modify doc_blame
+apply_nolint state_t.monad_map doc_blame unused_arguments
+apply_nolint state_t.orelse doc_blame unused_arguments
+apply_nolint state_t.pure doc_blame
+apply_nolint state_t.put doc_blame
+
+-- library/init/classical.lean
+apply_nolint classical.by_cases def_lemma doc_blame
+apply_nolint classical.decidable_inhabited doc_blame
+apply_nolint classical.epsilon doc_blame
+apply_nolint classical.eq_true_or_eq_false def_lemma doc_blame
+apply_nolint classical.indefinite_description def_lemma
+apply_nolint classical.inhabited_of_exists doc_blame
+apply_nolint classical.inhabited_of_nonempty doc_blame
+apply_nolint classical.prop_decidable doc_blame
+apply_nolint classical.some doc_blame
+apply_nolint classical.strong_indefinite_description def_lemma
+apply_nolint classical.type_decidable doc_blame
+apply_nolint classical.type_decidable_eq doc_blame
+
+-- library/init/coe.lean
+apply_nolint coe doc_blame
+apply_nolint coe_b doc_blame
+apply_nolint coe_base instance_priority
+apply_nolint coe_base_aux instance_priority
+apply_nolint coe_fn doc_blame
+apply_nolint coe_fn_b doc_blame
+apply_nolint coe_fn_trans dangerous_instance instance_priority
+apply_nolint coe_sort doc_blame
+apply_nolint coe_sort_trans dangerous_instance instance_priority
+apply_nolint coe_t doc_blame
+apply_nolint coe_to_lift instance_priority
+apply_nolint coe_trans dangerous_instance instance_priority
+apply_nolint coe_trans_aux dangerous_instance instance_priority
+apply_nolint has_coe doc_blame
+apply_nolint has_coe_t_aux doc_blame
+apply_nolint has_coe_to_fun doc_blame
+apply_nolint has_coe_to_sort doc_blame
+apply_nolint lift doc_blame
+apply_nolint lift_base instance_priority
+apply_nolint lift_t doc_blame
+apply_nolint lift_trans dangerous_instance instance_priority
+
+-- library/init/core.lean
+apply_nolint add_succ_defeq_succ_add_hint doc_blame
+apply_nolint and doc_blame
+apply_nolint and.elim_left def_lemma doc_blame
+apply_nolint and.elim_right def_lemma doc_blame
+apply_nolint bit0 doc_blame
+apply_nolint bit1 doc_blame
+apply_nolint bool doc_blame
+apply_nolint combinator.I doc_blame
+apply_nolint combinator.K doc_blame unused_arguments
+apply_nolint combinator.S doc_blame
+apply_nolint decidable doc_blame
+apply_nolint decidable_eq doc_blame
+apply_nolint decidable_pred doc_blame
+apply_nolint decidable_rel doc_blame
+apply_nolint default.sizeof doc_blame
+apply_nolint default_has_sizeof instance_priority
+apply_nolint empty doc_blame has_inhabited_instance
+apply_nolint eq doc_blame
+apply_nolint false doc_blame
+apply_nolint ge doc_blame
+apply_nolint gt doc_blame
+apply_nolint has_add doc_blame
+apply_nolint has_andthen doc_blame
+apply_nolint has_append doc_blame
+apply_nolint has_div doc_blame
+apply_nolint has_dvd doc_blame
+apply_nolint has_emptyc doc_blame
+apply_nolint has_equiv doc_blame
+apply_nolint has_insert doc_blame
+apply_nolint has_inter doc_blame
+apply_nolint has_inv doc_blame
+apply_nolint has_le doc_blame
+apply_nolint has_lt doc_blame
+apply_nolint has_mem doc_blame
+apply_nolint has_mod doc_blame
+apply_nolint has_mul doc_blame
+apply_nolint has_neg doc_blame
+apply_nolint has_one doc_blame
+apply_nolint has_pow doc_blame
+apply_nolint has_sdiff doc_blame
+apply_nolint has_sep doc_blame
+apply_nolint has_sizeof doc_blame
+apply_nolint has_ssubset doc_blame
+apply_nolint has_sub doc_blame
+apply_nolint has_subset doc_blame
+apply_nolint has_union doc_blame
+apply_nolint has_zero doc_blame
+apply_nolint heq.rfl def_lemma doc_blame
+apply_nolint id_rhs doc_blame
+apply_nolint list doc_blame
+apply_nolint nat doc_blame
+apply_nolint nat.add doc_blame
+apply_nolint nat.prio doc_blame
+apply_nolint not doc_blame
+apply_nolint opt_param unused_arguments
+apply_nolint option doc_blame
+apply_nolint or doc_blame
+apply_nolint or.intro_left def_lemma doc_blame
+apply_nolint or.intro_right def_lemma doc_blame
+apply_nolint prod doc_blame
+apply_nolint psigma doc_blame has_inhabited_instance
+apply_nolint psum doc_blame
+apply_nolint punit doc_blame
+apply_nolint rfl def_lemma doc_blame
+apply_nolint sigma doc_blame has_inhabited_instance
+apply_nolint sizeof doc_blame
+apply_nolint ssuperset doc_blame
+apply_nolint std.prec.arrow doc_blame
+apply_nolint std.prec.max doc_blame
+apply_nolint std.prec.max_plus doc_blame
+apply_nolint std.priority.default doc_blame
+apply_nolint std.priority.max doc_blame
+apply_nolint subtype doc_blame
+apply_nolint sum doc_blame
+apply_nolint superset doc_blame
+apply_nolint true doc_blame
+apply_nolint unification_constraint doc_blame
+apply_nolint unification_hint doc_blame
+apply_nolint unit.star doc_blame
+
+-- library/init/data/array/basic.lean
+apply_nolint array has_inhabited_instance
+apply_nolint array.foldl doc_blame
+apply_nolint array.map₂ doc_blame
+apply_nolint array.mem doc_blame
+apply_nolint array.nil doc_blame
+apply_nolint array.read doc_blame
+apply_nolint array.read' doc_blame
+apply_nolint array.rev_foldl doc_blame
+apply_nolint array.rev_iterate doc_blame
+apply_nolint array.rev_list doc_blame
+apply_nolint array.to_list doc_blame
+apply_nolint array.write doc_blame
+apply_nolint array.write' doc_blame
+apply_nolint d_array has_inhabited_instance
+apply_nolint d_array.beq_aux doc_blame
+apply_nolint d_array.foldl doc_blame
+apply_nolint d_array.iterate_aux doc_blame
+apply_nolint d_array.map doc_blame
+apply_nolint d_array.map₂ doc_blame
+apply_nolint d_array.rev_iterate doc_blame
+apply_nolint d_array.rev_iterate_aux doc_blame
+
+-- library/init/data/array/slice.lean
+apply_nolint array.drop doc_blame
+apply_nolint array.reverse doc_blame
+apply_nolint array.slice doc_blame
+apply_nolint array.take doc_blame
+apply_nolint array.take_right doc_blame
+
+-- library/init/data/bool/basic.lean
+apply_nolint band doc_blame
+apply_nolint bnot doc_blame
+apply_nolint bor doc_blame
+apply_nolint bxor doc_blame
+apply_nolint cond doc_blame
+
+-- library/init/data/bool/lemmas.lean
+apply_nolint coe_sort_ff simp_nf
+apply_nolint coe_sort_tt simp_nf
+apply_nolint ff_eq_tt_eq_false simp_nf
+apply_nolint tt_eq_ff_eq_false simp_nf
+
+-- library/init/data/char/basic.lean
+apply_nolint char.le doc_blame
+apply_nolint char.lt doc_blame
+apply_nolint char.of_nat doc_blame
+apply_nolint char.to_nat doc_blame
+apply_nolint is_valid_char doc_blame
+
+-- library/init/data/char/classes.lean
+apply_nolint char.is_alpha doc_blame
+apply_nolint char.is_alphanum doc_blame
+apply_nolint char.is_digit doc_blame
+apply_nolint char.is_lower doc_blame
+apply_nolint char.is_punctuation doc_blame
+apply_nolint char.is_upper doc_blame
+apply_nolint char.is_whitespace doc_blame
+apply_nolint char.to_lower doc_blame
+
+-- library/init/data/fin/basic.lean
+apply_nolint fin doc_blame has_inhabited_instance
+apply_nolint fin.elim0 doc_blame
+apply_nolint fin.le doc_blame
+apply_nolint fin.lt doc_blame
+
+-- library/init/data/fin/ops.lean
+apply_nolint fin.add doc_blame
+apply_nolint fin.div doc_blame
+apply_nolint fin.mod doc_blame
+apply_nolint fin.mul doc_blame
+apply_nolint fin.of_nat doc_blame
+apply_nolint fin.pred doc_blame
+apply_nolint fin.sub doc_blame
+apply_nolint fin.succ doc_blame
+
+-- library/init/data/int/basic.lean
+apply_nolint int doc_blame has_inhabited_instance
+apply_nolint int.add doc_blame
+apply_nolint int.div doc_blame
+apply_nolint int.fdiv doc_blame
+apply_nolint int.fmod doc_blame
+apply_nolint int.gcd doc_blame
+apply_nolint int.mod doc_blame
+apply_nolint int.mul doc_blame
+apply_nolint int.nat_abs doc_blame
+apply_nolint int.nat_abs_pos_of_ne_zero ge_or_gt
+apply_nolint int.nat_mod doc_blame
+apply_nolint int.neg doc_blame
+apply_nolint int.neg_of_nat doc_blame
+apply_nolint int.one doc_blame
+apply_nolint int.quot doc_blame
+apply_nolint int.rem doc_blame
+apply_nolint int.repr doc_blame
+apply_nolint int.sign doc_blame
+apply_nolint int.sub_nat_nat doc_blame
+apply_nolint int.to_nat doc_blame
+apply_nolint int.zero doc_blame
+
+-- library/init/data/int/bitwise.lean
+apply_nolint int.bit doc_blame
+apply_nolint int.bitwise doc_blame
+apply_nolint int.bodd doc_blame
+apply_nolint int.div2 doc_blame
+apply_nolint int.land doc_blame
+apply_nolint int.ldiff doc_blame
+apply_nolint int.lnot doc_blame
+apply_nolint int.lor doc_blame
+apply_nolint int.lxor doc_blame
+apply_nolint int.nat_bitwise doc_blame
+apply_nolint int.shiftl doc_blame
+apply_nolint int.shiftr doc_blame
+apply_nolint int.test_bit doc_blame
+
+-- library/init/data/int/comp_lemmas.lean
+apply_nolint int.bit0_nonneg ge_or_gt
+apply_nolint int.bit0_pos ge_or_gt
+apply_nolint int.bit1_nonneg ge_or_gt
+apply_nolint int.bit1_pos ge_or_gt
+apply_nolint int.nonneg_of_pos ge_or_gt
+apply_nolint int.of_nat_ge_zero ge_or_gt
+apply_nolint int.one_nonneg ge_or_gt
+apply_nolint int.one_pos ge_or_gt
+apply_nolint int.zero_nonneg ge_or_gt
+
+-- library/init/data/int/order.lean
+apply_nolint int.coe_succ_pos ge_or_gt
+apply_nolint int.le doc_blame
+apply_nolint int.lt doc_blame
+
+-- library/init/data/list/basic.lean
+apply_nolint bin_tree.to_list doc_blame
+apply_nolint list.all doc_blame
+apply_nolint list.any doc_blame
+apply_nolint list.append doc_blame
+apply_nolint list.bag_inter doc_blame
+apply_nolint list.band doc_blame
+apply_nolint list.bind doc_blame
+apply_nolint list.bor doc_blame
+apply_nolint list.diff doc_blame
+apply_nolint list.drop doc_blame
+apply_nolint list.drop_while doc_blame
+apply_nolint list.empty doc_blame
+apply_nolint list.enum doc_blame
+apply_nolint list.enum_from doc_blame
+apply_nolint list.erase doc_blame
+apply_nolint list.filter doc_blame
+apply_nolint list.filter_map doc_blame
+apply_nolint list.find_index doc_blame
+apply_nolint list.foldl doc_blame
+apply_nolint list.foldr doc_blame
+apply_nolint list.has_dec_eq doc_blame
+apply_nolint list.head doc_blame
+apply_nolint list.ilast doc_blame
+apply_nolint list.index_of doc_blame
+apply_nolint list.init doc_blame
+apply_nolint list.insert doc_blame
+apply_nolint list.inter doc_blame
+apply_nolint list.intercalate doc_blame
+apply_nolint list.intersperse doc_blame
+apply_nolint list.iota doc_blame
+apply_nolint list.join doc_blame
+apply_nolint list.last doc_blame
+apply_nolint list.le doc_blame
+apply_nolint list.length doc_blame
+apply_nolint list.lt doc_blame
+apply_nolint list.lt_eq_not_ge decidable_classical
+apply_nolint list.map doc_blame
+apply_nolint list.map₂ doc_blame
+apply_nolint list.mem doc_blame
+apply_nolint list.nth doc_blame
+apply_nolint list.nth_le doc_blame
+apply_nolint list.partition doc_blame
+apply_nolint list.range doc_blame
+apply_nolint list.range_core doc_blame
+apply_nolint list.remove_all doc_blame
+apply_nolint list.remove_nth doc_blame
+apply_nolint list.repeat doc_blame
+apply_nolint list.ret doc_blame
+apply_nolint list.reverse doc_blame
+apply_nolint list.reverse_core doc_blame
+apply_nolint list.span doc_blame
+apply_nolint list.tail doc_blame
+apply_nolint list.take doc_blame
+apply_nolint list.union doc_blame
+apply_nolint list.unzip doc_blame
+apply_nolint list.update_nth doc_blame
+apply_nolint list.zip doc_blame
+apply_nolint list.zip_with doc_blame
+
+-- library/init/data/list/lemmas.lean
+apply_nolint list.ball_cons simp_nf
+apply_nolint list.ball_nil simp_var_head
+apply_nolint list.bex_cons simp_nf
+apply_nolint list.map_accumr doc_blame
+apply_nolint list.map_accumr₂ doc_blame
+apply_nolint list.mem_cons_self simp_nf
+apply_nolint list.mem_nil_iff simp_nf
+apply_nolint list.not_bex_nil simp_nf
+apply_nolint list.sublist doc_blame
+apply_nolint list.subset doc_blame
+
+-- library/init/data/list/qsort.lean
+apply_nolint list.qsort doc_blame
+apply_nolint list.qsort.F doc_blame
+
+-- library/init/data/nat/basic.lean
+apply_nolint nat.le doc_blame
+apply_nolint nat.le_refl def_lemma doc_blame
+apply_nolint nat.less_than_or_equal doc_blame
+apply_nolint nat.lt doc_blame
+apply_nolint nat.mul doc_blame
+apply_nolint nat.pow doc_blame
+apply_nolint nat.pred doc_blame
+apply_nolint nat.repeat doc_blame
+apply_nolint nat.sub doc_blame
+apply_nolint nat.succ_pos def_lemma doc_blame
+
+-- library/init/data/nat/bitwise.lean
+apply_nolint nat.binary_rec doc_blame
+apply_nolint nat.bit doc_blame
+apply_nolint nat.bit_cases_on doc_blame
+apply_nolint nat.bits doc_blame
+apply_nolint nat.bitwise doc_blame
+apply_nolint nat.bodd doc_blame
+apply_nolint nat.bodd_div2 doc_blame
+apply_nolint nat.bodd_one simp_nf
+apply_nolint nat.bodd_two simp_nf
+apply_nolint nat.div2 doc_blame
+apply_nolint nat.div2_one simp_nf
+apply_nolint nat.div2_two simp_nf
+apply_nolint nat.land doc_blame
+apply_nolint nat.ldiff doc_blame
+apply_nolint nat.lor doc_blame
+apply_nolint nat.lxor doc_blame
+apply_nolint nat.shiftl doc_blame
+apply_nolint nat.shiftl' doc_blame
+apply_nolint nat.shiftr doc_blame
+apply_nolint nat.size doc_blame
+apply_nolint nat.test_bit doc_blame
+
+-- library/init/data/nat/div.lean
+apply_nolint nat.div doc_blame
+apply_nolint nat.mod doc_blame
+
+-- library/init/data/nat/gcd.lean
+apply_nolint nat.coprime doc_blame
+apply_nolint nat.gcd doc_blame
+apply_nolint nat.lcm doc_blame
+
+-- library/init/data/nat/lemmas.lean
+apply_nolint nat.discriminate def_lemma
+apply_nolint nat.eq_zero_or_pos ge_or_gt
+apply_nolint nat.find doc_blame
+apply_nolint nat.find_x doc_blame
+apply_nolint nat.iterate doc_blame
+apply_nolint nat.lt.base def_lemma doc_blame
+apply_nolint nat.lt.step def_lemma doc_blame
+apply_nolint nat.lt_by_cases doc_blame
+apply_nolint nat.lt_ge_by_cases doc_blame
+apply_nolint nat.lt_or_ge ge_or_gt
+apply_nolint nat.nat.lt_asymm dup_namespace
+apply_nolint nat.one_pos def_lemma doc_blame
+apply_nolint nat.pos_of_dvd_of_pos ge_or_gt
+apply_nolint nat.pos_of_ne_zero ge_or_gt
+apply_nolint nat.strong_rec_on doc_blame
+apply_nolint nat.sub_induction def_lemma
+apply_nolint nat.sub_pos_of_lt ge_or_gt
+apply_nolint nat.two_step_induction def_lemma
+
+-- library/init/data/option/basic.lean
+apply_nolint option.bind doc_blame
+apply_nolint option.get doc_blame
+apply_nolint option.get_or_else doc_blame
+apply_nolint option.is_none doc_blame
+apply_nolint option.is_some doc_blame
+apply_nolint option.lhoare doc_blame
+apply_nolint option.map doc_blame
+apply_nolint option.orelse doc_blame
+apply_nolint option.rhoare doc_blame
+apply_nolint option.to_monad doc_blame
+
+-- library/init/data/ordering/basic.lean
+apply_nolint cmp doc_blame
+apply_nolint cmp_using doc_blame
+apply_nolint ordering doc_blame
+apply_nolint ordering.or_else doc_blame
+apply_nolint ordering.swap doc_blame
+
+-- library/init/data/prod.lean
+apply_nolint prod.map doc_blame
+apply_nolint prod_has_decidable_lt unused_arguments
+
+-- library/init/data/quot.lean
+apply_nolint eqv_gen doc_blame
+apply_nolint eqv_gen.setoid doc_blame
+apply_nolint quot.hrec_on doc_blame
+apply_nolint quot.indep doc_blame
+apply_nolint quot.lift_on doc_blame
+apply_nolint quot.rec doc_blame
+apply_nolint quot.rec_on doc_blame
+apply_nolint quot.rec_on_subsingleton doc_blame
+apply_nolint quot.sound doc_blame
+apply_nolint quotient doc_blame has_inhabited_instance
+apply_nolint quotient.hrec_on doc_blame
+apply_nolint quotient.lift doc_blame
+apply_nolint quotient.lift_on doc_blame
+apply_nolint quotient.lift_on₂ doc_blame
+apply_nolint quotient.lift₂ doc_blame
+apply_nolint quotient.mk doc_blame
+apply_nolint quotient.rec doc_blame
+apply_nolint quotient.rec_on doc_blame
+apply_nolint quotient.rec_on_subsingleton doc_blame
+apply_nolint quotient.rec_on_subsingleton₂ doc_blame
+apply_nolint quotient.sound def_lemma doc_blame
+
+-- library/init/data/rbmap/basic.lean
+apply_nolint mk_rbmap doc_blame
+apply_nolint rbmap doc_blame
+apply_nolint rbmap.contains doc_blame
+apply_nolint rbmap.empty doc_blame
+apply_nolint rbmap.find doc_blame
+apply_nolint rbmap.find_entry doc_blame
+apply_nolint rbmap.fold doc_blame
+apply_nolint rbmap.from_list doc_blame
+apply_nolint rbmap.insert doc_blame
+apply_nolint rbmap.max doc_blame
+apply_nolint rbmap.mem doc_blame
+apply_nolint rbmap.min doc_blame
+apply_nolint rbmap.rbmap_lt_dec doc_blame
+apply_nolint rbmap.rev_fold doc_blame
+apply_nolint rbmap.to_list doc_blame
+apply_nolint rbmap.to_value doc_blame
+apply_nolint rbmap_lt doc_blame
+apply_nolint rbmap_of doc_blame
+
+-- library/init/data/rbtree/basic.lean
+apply_nolint mk_rbtree doc_blame
+apply_nolint rbnode doc_blame
+apply_nolint rbnode.balance1 doc_blame
+apply_nolint rbnode.balance1_node doc_blame
+apply_nolint rbnode.balance2 doc_blame
+apply_nolint rbnode.balance2_node doc_blame
+apply_nolint rbnode.color doc_blame
+apply_nolint rbnode.depth doc_blame
+apply_nolint rbnode.find doc_blame
+apply_nolint rbnode.fold doc_blame
+apply_nolint rbnode.get_color doc_blame
+apply_nolint rbnode.ins doc_blame
+apply_nolint rbnode.insert doc_blame
+apply_nolint rbnode.max doc_blame
+apply_nolint rbnode.mem doc_blame
+apply_nolint rbnode.mem_exact doc_blame
+apply_nolint rbnode.min doc_blame
+apply_nolint rbnode.mk_insert_result doc_blame
+apply_nolint rbnode.rev_fold doc_blame
+apply_nolint rbnode.well_formed doc_blame
+apply_nolint rbtree doc_blame
+apply_nolint rbtree.contains doc_blame
+apply_nolint rbtree.depth doc_blame
+apply_nolint rbtree.empty doc_blame
+apply_nolint rbtree.find doc_blame
+apply_nolint rbtree.fold doc_blame
+apply_nolint rbtree.from_list doc_blame
+apply_nolint rbtree.insert doc_blame
+apply_nolint rbtree.max doc_blame
+apply_nolint rbtree.mem doc_blame
+apply_nolint rbtree.mem_exact doc_blame
+apply_nolint rbtree.min doc_blame
+apply_nolint rbtree.rev_fold doc_blame
+apply_nolint rbtree.to_list doc_blame
+apply_nolint rbtree_of doc_blame
+
+-- library/init/data/rbtree/default.lean
+apply_nolint rbtree.default_lt doc_blame
+
+-- library/init/data/repr.lean
+apply_nolint char.quote_core doc_blame
+apply_nolint char.repr doc_blame
+apply_nolint char_to_hex doc_blame
+apply_nolint hex_digit_repr doc_blame
+apply_nolint list.repr doc_blame
+apply_nolint list.repr_aux doc_blame
+apply_nolint nat.digit_char doc_blame
+apply_nolint nat.digit_succ doc_blame
+apply_nolint nat.repr doc_blame
+apply_nolint nat.to_digits doc_blame
+apply_nolint string.quote doc_blame
+apply_nolint string.quote_aux doc_blame
+
+-- library/init/data/set.lean
+apply_nolint set doc_blame has_inhabited_instance
+apply_nolint set.compl doc_blame
+apply_nolint set.diff doc_blame
+apply_nolint set.image doc_blame
+apply_nolint set.insert doc_blame
+apply_nolint set.inter doc_blame
+apply_nolint set.mem doc_blame
+apply_nolint set.powerset doc_blame
+apply_nolint set.sUnion doc_blame
+apply_nolint set.sep doc_blame
+apply_nolint set.subset doc_blame
+apply_nolint set.union doc_blame
+apply_nolint set.univ doc_blame
+apply_nolint set_of doc_blame
+
+-- library/init/data/setoid.lean
+apply_nolint setoid doc_blame
+apply_nolint setoid_has_equiv instance_priority
+
+-- library/init/data/sigma/lex.lean
+apply_nolint psigma.lex doc_blame
+apply_nolint psigma.lex_accessible def_lemma doc_blame
+apply_nolint psigma.lex_ndep doc_blame
+apply_nolint psigma.lex_ndep_wf def_lemma doc_blame
+apply_nolint psigma.lex_wf def_lemma doc_blame
+apply_nolint psigma.mk_skip_left def_lemma doc_blame
+apply_nolint psigma.rev_lex doc_blame
+apply_nolint psigma.rev_lex_accessible def_lemma doc_blame
+apply_nolint psigma.rev_lex_wf def_lemma doc_blame
+apply_nolint psigma.skip_left doc_blame
+apply_nolint psigma.skip_left_wf def_lemma doc_blame
+
+-- library/init/data/string/basic.lean
+apply_nolint char.to_string doc_blame
+apply_nolint list.as_string doc_blame
+apply_nolint string doc_blame
+apply_nolint string.append doc_blame
+apply_nolint string.back doc_blame
+apply_nolint string.backn doc_blame
+apply_nolint string.empty doc_blame
+apply_nolint string.fold doc_blame
+apply_nolint string.front doc_blame
+apply_nolint string.intercalate doc_blame
+apply_nolint string.is_empty doc_blame
+apply_nolint string.iterator doc_blame
+apply_nolint string.iterator.curr doc_blame
+apply_nolint string.iterator.extract doc_blame
+apply_nolint string.iterator.extract_core doc_blame
+apply_nolint string.iterator.has_next doc_blame
+apply_nolint string.iterator.has_prev doc_blame
+apply_nolint string.iterator.insert doc_blame
+apply_nolint string.iterator.next doc_blame
+apply_nolint string.iterator.next_to_string doc_blame
+apply_nolint string.iterator.nextn doc_blame
+apply_nolint string.iterator.prev doc_blame
+apply_nolint string.iterator.prev_to_string doc_blame
+apply_nolint string.iterator.prevn doc_blame
+apply_nolint string.iterator.remove doc_blame
+apply_nolint string.iterator.set_curr doc_blame
+apply_nolint string.iterator.to_end doc_blame
+apply_nolint string.iterator.to_string doc_blame
+apply_nolint string.iterator_imp doc_blame
+apply_nolint string.join doc_blame
+apply_nolint string.length doc_blame
+apply_nolint string.mk_iterator doc_blame
+apply_nolint string.pop_back doc_blame
+apply_nolint string.popn_back doc_blame
+apply_nolint string.push doc_blame
+apply_nolint string.singleton doc_blame
+apply_nolint string.str doc_blame
+apply_nolint string.to_list doc_blame
+apply_nolint string.to_nat doc_blame
+apply_nolint string_imp doc_blame
+
+-- library/init/data/string/ops.lean
+apply_nolint string.split doc_blame
+
+-- library/init/data/subtype/basic.lean
+apply_nolint subtype.exists_of_subtype def_lemma doc_blame
+apply_nolint subtype.inhabited impossible_instance
+
+-- library/init/data/to_string.lean
+apply_nolint list.to_string doc_blame
+apply_nolint list.to_string_aux doc_blame
+apply_nolint to_string doc_blame
+
+-- library/init/data/unsigned/basic.lean
+apply_nolint unsigned doc_blame
+apply_nolint unsigned.of_nat' doc_blame
+apply_nolint unsigned.to_nat doc_blame
+apply_nolint unsigned_sz doc_blame
+
+-- library/init/data/unsigned/ops.lean
+apply_nolint unsigned.of_nat doc_blame
+
+-- library/init/default.lean
+apply_nolint debugger.attr doc_blame
+
+-- library/init/function.lean
+apply_nolint function.app doc_blame
+apply_nolint function.bijective doc_blame
+apply_nolint function.combine doc_blame
+apply_nolint function.comp doc_blame
+apply_nolint function.comp_left doc_blame
+apply_nolint function.comp_right doc_blame
+apply_nolint function.const doc_blame unused_arguments
+apply_nolint function.curry doc_blame
+apply_nolint function.dcomp doc_blame
+apply_nolint function.has_left_inverse doc_blame
+apply_nolint function.has_right_inverse doc_blame
+apply_nolint function.id_of_left_inverse def_lemma doc_blame
+apply_nolint function.id_of_right_inverse def_lemma doc_blame
+apply_nolint function.injective doc_blame
+apply_nolint function.on_fun doc_blame
+apply_nolint function.surjective doc_blame
+apply_nolint function.swap doc_blame
+apply_nolint function.uncurry doc_blame
+
+-- library/init/funext.lean
+apply_nolint function.equiv doc_blame
+
+-- library/init/logic.lean
+apply_nolint Exists doc_blame
+apply_nolint and.symm def_lemma doc_blame
+apply_nolint and_implies def_lemma doc_blame
+apply_nolint anti_symmetric doc_blame
+apply_nolint arbitrary doc_blame
+apply_nolint as_false doc_blame
+apply_nolint as_true doc_blame
+apply_nolint associative doc_blame
+apply_nolint cast doc_blame
+apply_nolint commutative doc_blame
+apply_nolint decidable.by_cases doc_blame
+apply_nolint decidable.by_contradiction decidable_classical
+apply_nolint decidable.em decidable_classical
+apply_nolint decidable.not_and_iff_or_not decidable_classical
+apply_nolint decidable.not_not_iff decidable_classical
+apply_nolint decidable.not_or_iff_and_not decidable_classical
+apply_nolint decidable.of_not_not decidable_classical
+apply_nolint decidable.rec_on_false doc_blame
+apply_nolint decidable.rec_on_true doc_blame
+apply_nolint decidable.to_bool doc_blame
+apply_nolint decidable_eq_of_bool_pred doc_blame
+apply_nolint decidable_of_decidable_of_eq doc_blame
+apply_nolint decidable_of_decidable_of_iff doc_blame
+apply_nolint dite doc_blame
+apply_nolint empty_relation doc_blame unused_arguments
+apply_nolint eq.mp doc_blame
+apply_nolint eq.mpr doc_blame
+apply_nolint equivalence doc_blame
+apply_nolint exists.intro def_lemma doc_blame
+apply_nolint exists_unique doc_blame
+apply_nolint false.elim doc_blame
+apply_nolint false_iff_true simp_nf
+apply_nolint false_implies_iff simp_nf
+apply_nolint flip doc_blame
+apply_nolint heq.elim def_lemma
+apply_nolint heq_self_iff_true simp_nf
+apply_nolint id doc_blame
+apply_nolint iff doc_blame
+apply_nolint implies doc_blame
+apply_nolint implies_true_iff simp_nf
+apply_nolint inhabited doc_blame
+apply_nolint inv_image doc_blame
+apply_nolint irreflexive doc_blame
+apply_nolint is_dec_eq doc_blame
+apply_nolint is_dec_refl doc_blame
+apply_nolint ite doc_blame
+apply_nolint left_cancelative doc_blame
+apply_nolint left_commutative doc_blame
+apply_nolint left_distributive doc_blame
+apply_nolint left_identity doc_blame
+apply_nolint mk_equivalence def_lemma doc_blame
+apply_nolint ne doc_blame
+apply_nolint ne_self_iff_false simp_nf
+apply_nolint non_contradictory doc_blame
+apply_nolint nonempty doc_blame
+apply_nolint nonempty.elim def_lemma doc_blame
+apply_nolint nonempty_of_inhabited inhabited_nonempty instance_priority
+apply_nolint not_not_em def_lemma doc_blame
+apply_nolint not_not_not_iff def_lemma doc_blame
+apply_nolint not_true_iff def_lemma doc_blame
+apply_nolint of_as_true def_lemma doc_blame
+apply_nolint or.by_cases doc_blame
+apply_nolint or.neg_resolve_left def_lemma doc_blame
+apply_nolint or.neg_resolve_right def_lemma doc_blame
+apply_nolint or.resolve_left def_lemma doc_blame
+apply_nolint or.resolve_right def_lemma doc_blame
+apply_nolint or.symm def_lemma doc_blame
+apply_nolint reflexive doc_blame
+apply_nolint right_cancelative doc_blame
+apply_nolint right_commutative doc_blame
+apply_nolint right_distributive doc_blame
+apply_nolint right_identity doc_blame
+apply_nolint right_inverse doc_blame
+apply_nolint subrelation doc_blame
+apply_nolint subsingleton doc_blame
+apply_nolint subsingleton.elim def_lemma doc_blame
+apply_nolint subsingleton.helim def_lemma doc_blame
+apply_nolint subsingleton_prop instance_priority
+apply_nolint symmetric doc_blame
+apply_nolint tc doc_blame
+apply_nolint to_bool_false_eq_ff simp_nf
+apply_nolint to_bool_true_eq_tt simp_nf
+apply_nolint total doc_blame
+apply_nolint transitive doc_blame
+apply_nolint trivial def_lemma doc_blame
+apply_nolint true_iff_false simp_nf
+apply_nolint true_implies_iff simp_nf
+apply_nolint type_eq_of_heq def_lemma doc_blame
+apply_nolint xor doc_blame
+
+-- library/init/meta/ac_tactics.lean
+apply_nolint tactic.flat_assoc doc_blame
+apply_nolint tactic.perm_ac doc_blame
+
+-- library/init/meta/async_tactic.lean
+apply_nolint tactic.prove_goal_async doc_blame
+apply_nolint tactic.run_async doc_blame
+
+-- library/init/meta/attribute.lean
+apply_nolint get_attribute_cache_dyn doc_blame
+apply_nolint get_name_set_for_attr doc_blame
+apply_nolint mk_name_set_attr doc_blame
+apply_nolint user_attribute.dflt_parser doc_blame
+apply_nolint user_attribute.get_param_untyped doc_blame
+apply_nolint user_attribute.parse_reflect doc_blame
+apply_nolint user_attribute.set doc_blame
+apply_nolint user_attribute.set_untyped doc_blame
+
+-- library/init/meta/backward.lean
+apply_nolint tactic.back_chaining doc_blame
+apply_nolint tactic.back_chaining_core doc_blame
+apply_nolint tactic.back_chaining_using doc_blame
+apply_nolint tactic.back_chaining_using_hs doc_blame
+apply_nolint tactic.back_lemmas doc_blame
+apply_nolint tactic.back_lemmas_add_extra doc_blame
+apply_nolint tactic.back_lemmas_find doc_blame
+apply_nolint tactic.back_lemmas_insert doc_blame
+apply_nolint tactic.back_lemmas_insert_core doc_blame
+apply_nolint tactic.backward_chaining_core doc_blame
+apply_nolint tactic.mk_back_lemmas doc_blame
+apply_nolint tactic.mk_back_lemmas_core doc_blame
+
+-- library/init/meta/comp_value_tactics.lean
+apply_nolint mk_char_val_ne_proof doc_blame
+apply_nolint mk_fin_val_ne_proof doc_blame
+apply_nolint mk_int_val_ne_proof doc_blame
+apply_nolint mk_nat_val_le_proof doc_blame
+apply_nolint mk_nat_val_lt_proof doc_blame
+apply_nolint mk_nat_val_ne_proof doc_blame
+apply_nolint mk_string_val_ne_proof doc_blame
+apply_nolint tactic.comp_val doc_blame
+
+-- library/init/meta/congr_lemma.lean
+apply_nolint congr_arg_kind.to_string doc_blame
+
+-- library/init/meta/congr_tactic.lean
+apply_nolint tactic.apply_congr_core doc_blame
+apply_nolint tactic.apply_eq_congr_core doc_blame
+apply_nolint tactic.apply_heq_congr_core doc_blame
+apply_nolint tactic.congr doc_blame
+apply_nolint tactic.congr_core doc_blame
+
+-- library/init/meta/constructor_tactic.lean
+apply_nolint tactic.constructor doc_blame
+apply_nolint tactic.constructor_idx doc_blame
+apply_nolint tactic.econstructor doc_blame
+apply_nolint tactic.existsi doc_blame
+apply_nolint tactic.fconstructor doc_blame
+apply_nolint tactic.get_constructors_for doc_blame
+apply_nolint tactic.left doc_blame
+apply_nolint tactic.right doc_blame
+apply_nolint tactic.split doc_blame
+
+-- library/init/meta/contradiction_tactic.lean
+apply_nolint tactic.contradiction doc_blame
+apply_nolint tactic.exfalso doc_blame
+
+-- library/init/meta/converter/conv.lean
+apply_nolint conv.lhs doc_blame
+apply_nolint conv.rhs doc_blame
+
+-- library/init/meta/converter/interactive.lean
+apply_nolint conv.execute doc_blame
+apply_nolint conv.interactive.change doc_blame
+apply_nolint conv.interactive.congr doc_blame
+apply_nolint conv.interactive.done doc_blame
+apply_nolint conv.interactive.dsimp doc_blame
+apply_nolint conv.interactive.find doc_blame
+apply_nolint conv.interactive.for doc_blame
+apply_nolint conv.interactive.funext doc_blame
+apply_nolint conv.interactive.guard_lhs doc_blame
+apply_nolint conv.interactive.itactic doc_blame
+apply_nolint conv.interactive.rewrite doc_blame
+apply_nolint conv.interactive.rw doc_blame
+apply_nolint conv.interactive.simp doc_blame
+apply_nolint conv.interactive.skip doc_blame
+apply_nolint conv.interactive.to_lhs doc_blame
+apply_nolint conv.interactive.to_rhs doc_blame
+apply_nolint conv.interactive.trace_lhs doc_blame
+apply_nolint conv.interactive.whnf doc_blame
+apply_nolint conv.istep doc_blame
+apply_nolint conv.save_info doc_blame
+apply_nolint conv.solve1 doc_blame
+apply_nolint conv.step doc_blame
+apply_nolint tactic.interactive.conv doc_blame
+
+-- library/init/meta/decl_cmds.lean
+apply_nolint copy_decl_using doc_blame
+
+-- library/init/meta/declaration.lean
+apply_nolint declaration.is_definition doc_blame
+apply_nolint declaration.is_trusted doc_blame
+apply_nolint declaration.map_value doc_blame
+apply_nolint declaration.to_definition doc_blame
+apply_nolint declaration.to_name doc_blame
+apply_nolint declaration.type doc_blame
+apply_nolint declaration.univ_params doc_blame
+apply_nolint declaration.update_name doc_blame
+apply_nolint declaration.update_type doc_blame
+apply_nolint declaration.update_value doc_blame
+apply_nolint declaration.update_value_task doc_blame
+apply_nolint declaration.value doc_blame
+apply_nolint declaration.value_task doc_blame
+apply_nolint mk_definition doc_blame
+
+-- library/init/meta/derive.lean
+apply_nolint derive_attr doc_blame
+apply_nolint derive_handler_attr doc_blame
+apply_nolint has_reflect_derive_handler doc_blame
+apply_nolint has_sizeof_derive_handler doc_blame
+
+-- library/init/meta/environment.lean
+apply_nolint environment.add_defn_eqns doc_blame
+apply_nolint environment.contains doc_blame
+apply_nolint environment.is_constructor_app doc_blame
+apply_nolint environment.is_definition doc_blame
+apply_nolint environment.is_refl_app doc_blame
+apply_nolint environment.unfold_all_macros doc_blame
+apply_nolint environment.unfold_untrusted_macros doc_blame
+
+-- library/init/meta/exceptional.lean
+apply_nolint exceptional.bind doc_blame
+apply_nolint exceptional.fail doc_blame
+apply_nolint exceptional.return doc_blame
+apply_nolint exceptional.to_bool doc_blame
+apply_nolint exceptional.to_option doc_blame
+apply_nolint exceptional.to_string doc_blame
+
+-- library/init/meta/expr.lean
+apply_nolint expr.app_arg doc_blame
+apply_nolint expr.app_fn doc_blame
+apply_nolint expr.app_of_list doc_blame
+apply_nolint expr.binding_body doc_blame
+apply_nolint expr.binding_domain doc_blame
+apply_nolint expr.binding_info doc_blame
+apply_nolint expr.binding_name doc_blame
+apply_nolint expr.const_name doc_blame
+apply_nolint expr.expr.lt_prop doc_blame dup_namespace
+apply_nolint expr.extract_opt_auto_param doc_blame
+apply_nolint expr.get_app_args doc_blame
+apply_nolint expr.get_app_args_aux doc_blame
+apply_nolint expr.get_app_fn doc_blame
+apply_nolint expr.get_app_num_args doc_blame
+apply_nolint expr.imp doc_blame
+apply_nolint expr.instantiate_locals doc_blame
+apply_nolint expr.is_and doc_blame
+apply_nolint expr.is_app doc_blame
+apply_nolint expr.is_app_of doc_blame
+apply_nolint expr.is_arrow doc_blame
+apply_nolint expr.is_aux_decl doc_blame
+apply_nolint expr.is_bin_arith_app doc_blame
+apply_nolint expr.is_constant doc_blame
+apply_nolint expr.is_constant_of doc_blame
+apply_nolint expr.is_eq doc_blame
+apply_nolint expr.is_false doc_blame
+apply_nolint expr.is_ge doc_blame
+apply_nolint expr.is_gt doc_blame
+apply_nolint expr.is_heq doc_blame
+apply_nolint expr.is_iff doc_blame
+apply_nolint expr.is_lambda doc_blame
+apply_nolint expr.is_le doc_blame
+apply_nolint expr.is_let doc_blame
+apply_nolint expr.is_local_constant doc_blame
+apply_nolint expr.is_lt doc_blame
+apply_nolint expr.is_macro doc_blame
+apply_nolint expr.is_ne doc_blame
+apply_nolint expr.is_not doc_blame
+apply_nolint expr.is_numeral doc_blame
+apply_nolint expr.is_or doc_blame
+apply_nolint expr.is_pi doc_blame
+apply_nolint expr.is_var doc_blame
+apply_nolint expr.ith_arg doc_blame
+apply_nolint expr.ith_arg_aux doc_blame
+apply_nolint expr.local_pp_name doc_blame
+apply_nolint expr.local_type doc_blame
+apply_nolint expr.local_uniq_name doc_blame
+apply_nolint expr.mk_app doc_blame
+apply_nolint expr.mk_binding doc_blame
+apply_nolint expr.mk_false doc_blame
+apply_nolint expr.mk_true doc_blame
+apply_nolint expr.mk_var doc_blame
+apply_nolint expr.to_raw_fmt doc_blame
+apply_nolint expr.to_string doc_blame
+apply_nolint expr_map.mk doc_blame
+apply_nolint expr_set doc_blame
+apply_nolint mk_expr_map doc_blame
+apply_nolint mk_expr_set doc_blame
+apply_nolint reflect doc_blame
+apply_nolint reflected has_coe_to_fun
+apply_nolint reflected.subst doc_blame
+apply_nolint reflected.to_expr doc_blame
+
+-- library/init/meta/float.lean
+apply_nolint native.float doc_blame
+apply_nolint native.float.abs doc_blame
+apply_nolint native.float.acos doc_blame
+apply_nolint native.float.acosh doc_blame
+apply_nolint native.float.add doc_blame
+apply_nolint native.float.asin doc_blame
+apply_nolint native.float.asinh doc_blame
+apply_nolint native.float.atan doc_blame
+apply_nolint native.float.atanh doc_blame
+apply_nolint native.float.cos doc_blame
+apply_nolint native.float.cosh doc_blame
+apply_nolint native.float.div doc_blame
+apply_nolint native.float.is_finite doc_blame
+apply_nolint native.float.le doc_blame
+apply_nolint native.float.log10 doc_blame
+apply_nolint native.float.log2 doc_blame
+apply_nolint native.float.lt doc_blame
+apply_nolint native.float.max doc_blame
+apply_nolint native.float.min doc_blame
+apply_nolint native.float.mul doc_blame
+apply_nolint native.float.neg doc_blame
+apply_nolint native.float.of_int doc_blame
+apply_nolint native.float.of_nat doc_blame
+apply_nolint native.float.of_string doc_blame
+apply_nolint native.float.one doc_blame
+apply_nolint native.float.pi doc_blame
+apply_nolint native.float.pow doc_blame
+apply_nolint native.float.sin doc_blame
+apply_nolint native.float.sinh doc_blame
+apply_nolint native.float.sub doc_blame
+apply_nolint native.float.tan doc_blame
+apply_nolint native.float.tanh doc_blame
+apply_nolint native.float.to_repr doc_blame
+apply_nolint native.float.zero doc_blame
+
+-- library/init/meta/format.lean
+apply_nolint format.bracket doc_blame
+apply_nolint format.color doc_blame
+apply_nolint format.indent doc_blame
+apply_nolint format.is_nil doc_blame
+apply_nolint format.join doc_blame
+apply_nolint format.of_nat doc_blame
+apply_nolint format.of_options doc_blame
+apply_nolint format.of_string doc_blame
+apply_nolint format.to_string doc_blame
+apply_nolint format.when doc_blame
+apply_nolint list.to_format doc_blame
+apply_nolint to_fmt doc_blame
+
+-- library/init/meta/fun_info.lean
+apply_nolint fun_info doc_blame
+apply_nolint fun_info_to_format doc_blame
+apply_nolint param_info doc_blame
+apply_nolint param_info.to_format doc_blame
+apply_nolint subsingleton_info_to_format doc_blame
+apply_nolint tactic.fold_explicit_args doc_blame
+apply_nolint tactic.fold_explicit_args_aux doc_blame
+apply_nolint tactic.get_spec_prefix_size doc_blame
+apply_nolint tactic.get_subsingleton_info doc_blame
+
+-- library/init/meta/has_reflect.lean
+apply_nolint reflected_value doc_blame
+apply_nolint reflected_value.expr doc_blame
+apply_nolint reflected_value.subst doc_blame
+
+-- library/init/meta/hole_command.lean
+apply_nolint infer_type_cmd doc_blame
+apply_nolint show_goal_cmd doc_blame
+apply_nolint use_cmd doc_blame
+
+-- library/init/meta/injection_tactic.lean
+apply_nolint tactic.injection doc_blame
+apply_nolint tactic.injection_with doc_blame
+apply_nolint tactic.injections_with doc_blame
+
+-- library/init/meta/interaction_monad.lean
+apply_nolint interaction_monad doc_blame
+apply_nolint interaction_monad.bracket doc_blame
+apply_nolint interaction_monad.fail doc_blame
+apply_nolint interaction_monad.failed doc_blame
+apply_nolint interaction_monad.mk_exception doc_blame unused_arguments
+apply_nolint interaction_monad.orelse' doc_blame
+apply_nolint interaction_monad.result doc_blame
+apply_nolint interaction_monad.result.clamp_pos doc_blame
+apply_nolint interaction_monad.result_to_string doc_blame
+apply_nolint interaction_monad.silent_fail doc_blame
+apply_nolint interaction_monad_bind doc_blame
+apply_nolint interaction_monad_fmap doc_blame
+apply_nolint interaction_monad_orelse doc_blame
+apply_nolint interaction_monad_return doc_blame
+apply_nolint interaction_monad_seq doc_blame
+
+-- library/init/meta/interactive.lean
+apply_nolint has_dup doc_blame
+apply_nolint tactic.apply_inj_lemma doc_blame
+apply_nolint tactic.i_to_expr doc_blame
+apply_nolint tactic.i_to_expr_for_apply doc_blame
+apply_nolint tactic.i_to_expr_no_subgoals doc_blame
+apply_nolint tactic.i_to_expr_strict doc_blame
+apply_nolint tactic.ids_to_simp_arg_list doc_blame
+apply_nolint tactic.interactive.cases_arg_p doc_blame
+apply_nolint tactic.interactive.cases_core doc_blame
+apply_nolint tactic.interactive.concat_tags doc_blame
+apply_nolint tactic.interactive.congr doc_blame
+apply_nolint tactic.interactive.constructor_matching doc_blame
+apply_nolint tactic.interactive.get_rule_eqn_lemmas doc_blame
+apply_nolint tactic.interactive.guard_expr_eq doc_blame
+apply_nolint tactic.interactive.propagate_tags doc_blame
+apply_nolint tactic.interactive.rw_rule doc_blame
+apply_nolint tactic.interactive.rw_rule_p doc_blame
+apply_nolint tactic.interactive.rw_rules doc_blame
+apply_nolint tactic.interactive.rw_rules_t doc_blame
+apply_nolint tactic.interactive.simp_core doc_blame
+apply_nolint tactic.interactive.simp_core_aux doc_blame
+apply_nolint tactic.interactive.to_expr' doc_blame
+apply_nolint tactic.mk_inj_eq doc_blame
+apply_nolint tactic.mk_simp_set doc_blame
+apply_nolint tactic.mk_simp_set_core doc_blame
+apply_nolint tactic.simp_arg doc_blame
+apply_nolint tactic.simp_arg_list doc_blame
+apply_nolint tactic.simp_arg_type doc_blame
+apply_nolint tactic.simp_config_ext doc_blame
+apply_nolint tactic.unfold_config doc_blame
+
+-- library/init/meta/interactive_base.lean
+apply_nolint format_macro doc_blame
+apply_nolint interactive.decl_attributes doc_blame
+apply_nolint interactive.decl_attributes.apply doc_blame
+apply_nolint interactive.decl_meta_info doc_blame
+apply_nolint interactive.decl_modifiers doc_blame
+apply_nolint interactive.inductive_decl doc_blame
+apply_nolint interactive.loc.apply doc_blame
+apply_nolint interactive.loc.get_locals doc_blame
+apply_nolint interactive.loc.include_goal doc_blame
+apply_nolint interactive.loc.try_apply doc_blame
+apply_nolint interactive.param_desc doc_blame
+apply_nolint interactive.parse unused_arguments
+apply_nolint interactive.parse_binders doc_blame
+apply_nolint interactive.parse_binders_core doc_blame
+apply_nolint interactive.single_inductive_decl doc_blame
+apply_nolint interactive.single_inductive_decl.name doc_blame
+apply_nolint interactive.types.brackets doc_blame
+apply_nolint interactive.types.list_of doc_blame
+apply_nolint interactive.types.location doc_blame
+apply_nolint interactive.types.only_flag doc_blame
+apply_nolint interactive.types.opt_pexpr_list doc_blame
+apply_nolint interactive.types.pexpr_list doc_blame
+apply_nolint interactive.types.pexpr_list_or_texpr doc_blame
+apply_nolint interactive.types.using_ident doc_blame
+apply_nolint interactive.types.with_ident_list doc_blame
+apply_nolint interactive.types.without_ident_list doc_blame
+apply_nolint interactive.with_desc unused_arguments
+apply_nolint sformat_macro doc_blame
+
+-- library/init/meta/lean/parser.lean
+apply_nolint lean.parser doc_blame
+apply_nolint lean.parser.add_local_level doc_blame
+apply_nolint lean.parser.get_env doc_blame
+apply_nolint lean.parser.include_var doc_blame
+apply_nolint lean.parser.itactic_reflected doc_blame
+apply_nolint lean.parser.list_available_include_vars doc_blame
+apply_nolint lean.parser.list_include_var_names doc_blame
+apply_nolint lean.parser.many doc_blame
+apply_nolint lean.parser.of_tactic doc_blame
+apply_nolint lean.parser.omit_var doc_blame
+apply_nolint lean.parser.parser_orelse doc_blame
+apply_nolint lean.parser.pop_local_scope doc_blame
+apply_nolint lean.parser.push_local_scope doc_blame
+apply_nolint lean.parser.reflect doc_blame
+apply_nolint lean.parser.reflectable doc_blame
+apply_nolint lean.parser.reflectable.expr doc_blame
+apply_nolint lean.parser.reflectable.has_reflect instance_priority
+apply_nolint lean.parser.reflectable.to_parser doc_blame
+apply_nolint lean.parser.sep_by doc_blame
+apply_nolint lean.parser.set_env doc_blame
+apply_nolint lean.parser.val doc_blame
+apply_nolint lean.parser_result doc_blame
+apply_nolint lean.parser_state doc_blame
+apply_nolint lean.parser_state.cur_pos doc_blame
+apply_nolint lean.parser_state.env doc_blame
+apply_nolint lean.parser_state.options doc_blame
+
+-- library/init/meta/level.lean
+apply_nolint level.fold doc_blame
+apply_nolint level.has_param doc_blame
+apply_nolint level.lex_lt doc_blame
+apply_nolint level.lt doc_blame
+apply_nolint level.of_nat doc_blame
+apply_nolint level.to_format doc_blame
+apply_nolint level.to_string doc_blame
+
+-- library/init/meta/local_context.lean
+apply_nolint local_context.fold doc_blame
+apply_nolint local_context.get_local doc_blame
+apply_nolint local_context.get_local_decl doc_blame
+apply_nolint local_context.is_subset doc_blame
+apply_nolint local_context.to_format doc_blame
+apply_nolint local_context.to_list doc_blame
+apply_nolint local_decl doc_blame
+
+-- library/init/meta/mk_dec_eq_instance.lean
+apply_nolint tactic.decidable_eq_derive_handler doc_blame
+apply_nolint tactic.mk_dec_eq_instance doc_blame
+apply_nolint tactic.mk_dec_eq_instance_core doc_blame
+
+-- library/init/meta/mk_has_sizeof_instance.lean
+apply_nolint tactic.mk_has_sizeof_instance doc_blame
+apply_nolint tactic.mk_has_sizeof_instance_core doc_blame
+
+-- library/init/meta/mk_inhabited_instance.lean
+apply_nolint tactic.mk_inhabited_instance doc_blame
+
+-- library/init/meta/name.lean
+apply_nolint auto_param unused_arguments
+apply_nolint mk_num_name doc_blame
+apply_nolint mk_simple_name doc_blame
+apply_nolint mk_str_name doc_blame
+apply_nolint name.append doc_blame
+apply_nolint name.cmp doc_blame
+apply_nolint name.components doc_blame
+apply_nolint name.get_prefix doc_blame
+apply_nolint name.is_internal doc_blame
+apply_nolint name.is_prefix_of doc_blame
+apply_nolint name.lex_cmp doc_blame
+apply_nolint name.lt doc_blame
+apply_nolint name.replace_prefix doc_blame
+apply_nolint name.to_string doc_blame
+apply_nolint name.to_string_with_sep doc_blame
+apply_nolint name.update_prefix doc_blame
+
+-- library/init/meta/occurrences.lean
+apply_nolint occurrences.contains doc_blame
+apply_nolint occurrences_repr doc_blame
+apply_nolint occurrences_to_format doc_blame
+
+-- library/init/meta/options.lean
+apply_nolint options doc_blame
+apply_nolint options.contains doc_blame
+apply_nolint options.fold doc_blame
+apply_nolint options.get_bool doc_blame
+apply_nolint options.get_nat doc_blame
+apply_nolint options.get_string doc_blame
+apply_nolint options.join doc_blame
+apply_nolint options.mk doc_blame
+apply_nolint options.set_bool doc_blame
+apply_nolint options.set_nat doc_blame
+apply_nolint options.set_string doc_blame
+apply_nolint options.size doc_blame
+
+-- library/init/meta/pexpr.lean
+apply_nolint has_to_pexpr doc_blame
+apply_nolint pexpr.get_structure_instance_info doc_blame
+apply_nolint pexpr.is_placeholder doc_blame
+apply_nolint pexpr.mk_explicit doc_blame
+apply_nolint pexpr.mk_field_macro doc_blame
+apply_nolint pexpr.mk_placeholder doc_blame
+apply_nolint pexpr.of_expr doc_blame
+apply_nolint to_pexpr doc_blame
+
+-- library/init/meta/rb_map.lean
+apply_nolint mk_name_map doc_blame
+apply_nolint mk_name_set doc_blame
+apply_nolint name_map doc_blame
+apply_nolint name_map.mk doc_blame
+apply_nolint name_set.contains doc_blame
+apply_nolint name_set.empty doc_blame
+apply_nolint name_set.erase doc_blame
+apply_nolint name_set.fold doc_blame
+apply_nolint name_set.insert doc_blame
+apply_nolint name_set.mfold doc_blame
+apply_nolint name_set.of_list doc_blame
+apply_nolint name_set.size doc_blame
+apply_nolint name_set.to_list doc_blame
+apply_nolint native.mk_nat_map doc_blame
+apply_nolint native.mk_rb_map doc_blame
+apply_nolint native.mk_rb_set doc_blame
+apply_nolint native.nat_map doc_blame
+apply_nolint native.nat_map.mk doc_blame
+apply_nolint native.rb_lmap.contains doc_blame
+apply_nolint native.rb_lmap.erase doc_blame
+apply_nolint native.rb_lmap.find doc_blame
+apply_nolint native.rb_lmap.insert doc_blame
+apply_nolint native.rb_lmap.mk doc_blame
+apply_nolint native.rb_map doc_blame
+apply_nolint native.rb_map.contains doc_blame
+apply_nolint native.rb_map.empty doc_blame
+apply_nolint native.rb_map.erase doc_blame
+apply_nolint native.rb_map.filter doc_blame
+apply_nolint native.rb_map.find doc_blame
+apply_nolint native.rb_map.fold doc_blame
+apply_nolint native.rb_map.for doc_blame
+apply_nolint native.rb_map.insert doc_blame
+apply_nolint native.rb_map.keys doc_blame
+apply_nolint native.rb_map.map doc_blame
+apply_nolint native.rb_map.max doc_blame
+apply_nolint native.rb_map.mfold doc_blame
+apply_nolint native.rb_map.min doc_blame
+apply_nolint native.rb_map.mk doc_blame
+apply_nolint native.rb_map.mk_core doc_blame
+apply_nolint native.rb_map.of_list doc_blame
+apply_nolint native.rb_map.set_of_list doc_blame
+apply_nolint native.rb_map.size doc_blame
+apply_nolint native.rb_map.to_list doc_blame
+apply_nolint native.rb_map.values doc_blame
+apply_nolint native.rb_set doc_blame
+apply_nolint native.rb_set.contains doc_blame
+apply_nolint native.rb_set.empty doc_blame
+apply_nolint native.rb_set.erase doc_blame
+apply_nolint native.rb_set.fold doc_blame
+apply_nolint native.rb_set.insert doc_blame
+apply_nolint native.rb_set.mfold doc_blame
+apply_nolint native.rb_set.size doc_blame
+apply_nolint native.rb_set.to_list doc_blame
+
+-- library/init/meta/rec_util.lean
+apply_nolint tactic.constructor_num_fields doc_blame
+apply_nolint tactic.mk_constructor_fresh_names doc_blame
+apply_nolint tactic.mk_constructors_fresh_names doc_blame
+
+-- library/init/meta/relation_tactics.lean
+apply_nolint tactic.reflexivity doc_blame
+apply_nolint tactic.relation_lhs_rhs doc_blame
+apply_nolint tactic.symmetry doc_blame
+apply_nolint tactic.transitivity doc_blame
+
+-- library/init/meta/rewrite_tactic.lean
+apply_nolint tactic.rewrite doc_blame
+apply_nolint tactic.rewrite_hyp doc_blame
+apply_nolint tactic.rewrite_target doc_blame
+
+-- library/init/meta/set_get_option_tactics.lean
+apply_nolint tactic.get_bool_option doc_blame
+apply_nolint tactic.get_nat_option doc_blame
+apply_nolint tactic.get_string_option doc_blame
+apply_nolint tactic.set_bool_option doc_blame
+apply_nolint tactic.set_nat_option doc_blame
+apply_nolint tactic.set_string_option doc_blame
+
+-- library/init/meta/simp_tactic.lean
+apply_nolint is_valid_simp_lemma doc_blame
+apply_nolint is_valid_simp_lemma_cnst doc_blame
+apply_nolint simp.default_max_steps doc_blame
+apply_nolint simp_attr.norm doc_blame
+apply_nolint simp_lemmas.pp doc_blame
+apply_nolint simp_lemmas.rewrites doc_blame
+apply_nolint tactic.collect_ctx_simps doc_blame
+apply_nolint tactic.delta_config doc_blame
+apply_nolint tactic.delta_hyp doc_blame
+apply_nolint tactic.delta_target doc_blame
+apply_nolint tactic.dsimp_config doc_blame
+apply_nolint tactic.dsimp_hyp doc_blame
+apply_nolint tactic.dsimp_target doc_blame
+apply_nolint tactic.dsimplify doc_blame
+apply_nolint tactic.dsimplify_core doc_blame
+apply_nolint tactic.dunfold doc_blame
+apply_nolint tactic.dunfold_config doc_blame
+apply_nolint tactic.dunfold_hyp doc_blame
+apply_nolint tactic.dunfold_target doc_blame
+apply_nolint tactic.get_simp_lemmas_or_default doc_blame
+apply_nolint tactic.intro1_aux doc_blame
+apply_nolint tactic.join_user_simp_lemmas doc_blame
+apply_nolint tactic.join_user_simp_lemmas_core doc_blame
+apply_nolint tactic.mk_eq_simp_ext doc_blame
+apply_nolint tactic.mk_simp_attr doc_blame
+apply_nolint tactic.non_dep_prop_hyps doc_blame
+apply_nolint tactic.simp_all doc_blame
+apply_nolint tactic.simp_all_entry doc_blame
+apply_nolint tactic.simp_bottom_up doc_blame
+apply_nolint tactic.simp_config doc_blame
+apply_nolint tactic.simp_hyp doc_blame
+apply_nolint tactic.simp_intros doc_blame
+apply_nolint tactic.simp_intros_aux doc_blame
+apply_nolint tactic.simp_intros_config doc_blame
+apply_nolint tactic.simp_target doc_blame
+apply_nolint tactic.simp_top_down doc_blame
+apply_nolint tactic.simplify_bottom_up doc_blame
+apply_nolint tactic.simplify_top_down doc_blame
+apply_nolint tactic.to_simp_lemmas doc_blame
+apply_nolint tactic.trace_algebra_info doc_blame
+apply_nolint tactic.unfold_proj_config doc_blame
+apply_nolint tactic.unfold_projs doc_blame
+apply_nolint tactic.unfold_projs_hyp doc_blame
+apply_nolint tactic.unfold_projs_target doc_blame
+
+-- library/init/meta/smt/congruence_closure.lean
+apply_nolint cc_config doc_blame
+apply_nolint cc_state.add doc_blame
+apply_nolint cc_state.eqc_of doc_blame
+apply_nolint cc_state.eqc_of_core doc_blame
+apply_nolint cc_state.eqc_size doc_blame
+apply_nolint cc_state.eqv_proof doc_blame
+apply_nolint cc_state.fold_eqc doc_blame
+apply_nolint cc_state.fold_eqc_core doc_blame
+apply_nolint cc_state.gmt doc_blame
+apply_nolint cc_state.in_singlenton_eqc doc_blame
+apply_nolint cc_state.inc_gmt doc_blame
+apply_nolint cc_state.inconsistent doc_blame
+apply_nolint cc_state.internalize doc_blame
+apply_nolint cc_state.is_cg_root doc_blame
+apply_nolint cc_state.is_eqv doc_blame
+apply_nolint cc_state.is_not_eqv doc_blame
+apply_nolint cc_state.mfold_eqc doc_blame
+apply_nolint cc_state.mk doc_blame
+apply_nolint cc_state.mk_core doc_blame
+apply_nolint cc_state.mk_using_hs doc_blame
+apply_nolint cc_state.mt doc_blame
+apply_nolint cc_state.next doc_blame
+apply_nolint cc_state.pp_core doc_blame
+apply_nolint cc_state.pp_eqc doc_blame
+apply_nolint cc_state.root doc_blame
+apply_nolint cc_state.roots doc_blame
+apply_nolint cc_state.roots_core doc_blame
+apply_nolint tactic.ac_refl doc_blame
+apply_nolint tactic.cc doc_blame
+apply_nolint tactic.cc_core doc_blame
+apply_nolint tactic.cc_dbg doc_blame
+apply_nolint tactic.cc_dbg_core doc_blame
+
+-- library/init/meta/smt/ematch.lean
+apply_nolint ematch_config doc_blame
+apply_nolint ematch_state doc_blame
+apply_nolint ematch_state.internalize doc_blame
+apply_nolint ematch_state.mk doc_blame
+apply_nolint get_hinst_lemmas_for_attr doc_blame
+apply_nolint hinst_lemma.id doc_blame
+apply_nolint hinst_lemma.mk doc_blame
+apply_nolint hinst_lemma.mk_from_decl doc_blame
+apply_nolint hinst_lemma.mk_from_decl_core doc_blame
+apply_nolint hinst_lemma.pp doc_blame
+apply_nolint hinst_lemmas doc_blame
+apply_nolint hinst_lemmas.add doc_blame
+apply_nolint hinst_lemmas.fold doc_blame
+apply_nolint hinst_lemmas.merge doc_blame
+apply_nolint hinst_lemmas.mk doc_blame
+apply_nolint hinst_lemmas.pp doc_blame
+apply_nolint merge_hinst_lemma_attrs doc_blame
+apply_nolint mk_hinst_lemma_attr_core doc_blame
+apply_nolint mk_hinst_lemma_attrs_core doc_blame
+apply_nolint mk_hinst_singleton doc_blame
+apply_nolint tactic.ematch doc_blame
+apply_nolint tactic.ematch_all doc_blame
+apply_nolint tactic.ematch_all_core doc_blame
+apply_nolint tactic.ematch_core doc_blame
+apply_nolint to_hinst_lemmas_core doc_blame
+
+-- library/init/meta/smt/interactive.lean
+apply_nolint smt_tactic.execute doc_blame
+apply_nolint smt_tactic.execute_with doc_blame
+apply_nolint smt_tactic.interactive.add_eqn_lemmas doc_blame
+apply_nolint smt_tactic.interactive.add_eqn_lemmas_for doc_blame
+apply_nolint smt_tactic.interactive.add_fact doc_blame
+apply_nolint smt_tactic.interactive.add_lemma doc_blame
+apply_nolint smt_tactic.interactive.add_lhs_lemma doc_blame
+apply_nolint smt_tactic.interactive.add_simp_lemmas doc_blame
+apply_nolint smt_tactic.interactive.apply doc_blame
+apply_nolint smt_tactic.interactive.apply_instance doc_blame
+apply_nolint smt_tactic.interactive.assume doc_blame
+apply_nolint smt_tactic.interactive.by_cases doc_blame
+apply_nolint smt_tactic.interactive.by_contra doc_blame
+apply_nolint smt_tactic.interactive.by_contradiction doc_blame
+apply_nolint smt_tactic.interactive.change doc_blame
+apply_nolint smt_tactic.interactive.destruct doc_blame
+apply_nolint smt_tactic.interactive.dsimp doc_blame
+apply_nolint smt_tactic.interactive.ematch_using doc_blame
+apply_nolint smt_tactic.interactive.exact doc_blame
+apply_nolint smt_tactic.interactive.fapply doc_blame
+apply_nolint smt_tactic.interactive.from doc_blame
+apply_nolint smt_tactic.interactive.guard_expr_eq doc_blame
+apply_nolint smt_tactic.interactive.guard_target doc_blame
+apply_nolint smt_tactic.interactive.have doc_blame
+apply_nolint smt_tactic.interactive.induction doc_blame
+apply_nolint smt_tactic.interactive.intros doc_blame
+apply_nolint smt_tactic.interactive.itactic doc_blame
+apply_nolint smt_tactic.interactive.let doc_blame
+apply_nolint smt_tactic.interactive.rsimp doc_blame
+apply_nolint smt_tactic.interactive.trace doc_blame
+apply_nolint smt_tactic.interactive.trace_state doc_blame
+apply_nolint smt_tactic.istep doc_blame unused_arguments
+apply_nolint smt_tactic.save_info doc_blame
+apply_nolint smt_tactic.skip doc_blame
+apply_nolint smt_tactic.solve_goals doc_blame
+apply_nolint smt_tactic.step doc_blame
+
+-- library/init/meta/smt/rsimp.lean
+apply_nolint no_rsimp doc_blame
+apply_nolint rsimp.collect_implied_eqs doc_blame
+apply_nolint rsimp.config doc_blame
+apply_nolint rsimp.is_value_like doc_blame
+apply_nolint rsimp.mk_repr_map doc_blame
+apply_nolint rsimp.repr_map doc_blame
+apply_nolint rsimp.rsimplify doc_blame
+apply_nolint rsimp.rsimplify_at doc_blame
+apply_nolint rsimp.rsimplify_goal doc_blame
+apply_nolint rsimp.to_repr_map doc_blame
+apply_nolint rsimp_attr doc_blame
+apply_nolint tactic.interactive.rsimp doc_blame
+apply_nolint tactic.rsimp doc_blame
+apply_nolint tactic.rsimp_at doc_blame
+
+-- library/init/meta/smt/smt_tactic.lean
+apply_nolint ematch doc_blame
+apply_nolint ematch_lhs doc_blame
+apply_nolint simp_attr.pre_smt doc_blame
+apply_nolint smt_config.set_classical doc_blame
+apply_nolint smt_goal doc_blame
+apply_nolint smt_state doc_blame
+apply_nolint smt_state.mk doc_blame
+apply_nolint smt_state.to_format doc_blame
+apply_nolint smt_tactic doc_blame
+apply_nolint smt_tactic.add_ematch_eqn_lemmas_for doc_blame
+apply_nolint smt_tactic.add_ematch_eqn_lemmas_for_core doc_blame
+apply_nolint smt_tactic.add_ematch_lemma doc_blame
+apply_nolint smt_tactic.add_ematch_lemma_core doc_blame
+apply_nolint smt_tactic.add_ematch_lemma_from_decl doc_blame
+apply_nolint smt_tactic.add_ematch_lemma_from_decl_core doc_blame
+apply_nolint smt_tactic.add_ematch_lhs_lemma doc_blame
+apply_nolint smt_tactic.add_ematch_lhs_lemma_from_decl doc_blame
+apply_nolint smt_tactic.add_lemmas doc_blame
+apply_nolint smt_tactic.add_lemmas_from_facts doc_blame
+apply_nolint smt_tactic.add_lemmas_from_facts_core doc_blame
+apply_nolint smt_tactic.by_cases doc_blame
+apply_nolint smt_tactic.by_contradiction doc_blame
+apply_nolint smt_tactic.classical doc_blame
+apply_nolint smt_tactic.destruct doc_blame
+apply_nolint smt_tactic.eblast doc_blame
+apply_nolint smt_tactic.ematch doc_blame
+apply_nolint smt_tactic.fail doc_blame
+apply_nolint smt_tactic.failed doc_blame
+apply_nolint smt_tactic.focus1 doc_blame
+apply_nolint smt_tactic.get_config doc_blame
+apply_nolint smt_tactic.get_facts doc_blame
+apply_nolint smt_tactic.get_goals doc_blame
+apply_nolint smt_tactic.get_lemmas doc_blame
+apply_nolint smt_tactic.get_refuted_facts doc_blame
+apply_nolint smt_tactic.induction doc_blame
+apply_nolint smt_tactic.intro_lst doc_blame
+apply_nolint smt_tactic.intron doc_blame
+apply_nolint smt_tactic.intros doc_blame
+apply_nolint smt_tactic.iterate doc_blame
+apply_nolint smt_tactic.mk_ematch_eqn_lemmas_for_core doc_blame
+apply_nolint smt_tactic.num_goals doc_blame
+apply_nolint smt_tactic.read doc_blame
+apply_nolint smt_tactic.set_goals doc_blame
+apply_nolint smt_tactic.set_lemmas doc_blame
+apply_nolint smt_tactic.slift_aux doc_blame
+apply_nolint smt_tactic.solve1 doc_blame
+apply_nolint smt_tactic.swap doc_blame
+apply_nolint smt_tactic.to_cc_state doc_blame
+apply_nolint smt_tactic.to_em_state doc_blame
+apply_nolint smt_tactic.to_expr doc_blame
+apply_nolint smt_tactic.trace doc_blame
+apply_nolint smt_tactic.trace_state doc_blame
+apply_nolint smt_tactic.try doc_blame
+apply_nolint smt_tactic.when doc_blame
+apply_nolint smt_tactic.when_tracing doc_blame
+apply_nolint smt_tactic.write doc_blame
+apply_nolint tactic_to_smt_tactic doc_blame
+apply_nolint using_smt doc_blame
+apply_nolint using_smt_with doc_blame
+
+-- library/init/meta/tactic.lean
+apply_nolint has_to_tactic_format doc_blame
+apply_nolint interactive.executor.execute_explicit doc_blame
+apply_nolint interactive.executor.execute_with_explicit doc_blame
+apply_nolint list.any_of doc_blame
+apply_nolint list.for_each doc_blame
+apply_nolint monad_from_pure_bind doc_blame
+apply_nolint option_to_tactic_format doc_blame
+apply_nolint tactic.abstract doc_blame
+apply_nolint tactic.add_inductive doc_blame
+apply_nolint tactic.add_meta_definition doc_blame
+apply_nolint tactic.any_hyp doc_blame
+apply_nolint tactic.any_hyp_aux doc_blame
+apply_nolint tactic.apply doc_blame
+apply_nolint tactic.apply_auto_param doc_blame
+apply_nolint tactic.apply_opt_param doc_blame
+apply_nolint tactic.assumption doc_blame
+apply_nolint tactic.by_cases doc_blame
+apply_nolint tactic.by_contradiction doc_blame
+apply_nolint tactic.clear_lst doc_blame
+apply_nolint tactic.down doc_blame
+apply_nolint tactic.eapplyc doc_blame
+apply_nolint tactic.fail doc_blame
+apply_nolint tactic.fail_if_success doc_blame
+apply_nolint tactic.find_assumption doc_blame
+apply_nolint tactic.focus1 doc_blame
+apply_nolint tactic.frozen_local_instances doc_blame
+apply_nolint tactic.funext doc_blame
+apply_nolint tactic.funext_core doc_blame
+apply_nolint tactic.funext_lst doc_blame
+apply_nolint tactic.generalizes doc_blame
+apply_nolint tactic.get_decl doc_blame
+apply_nolint tactic.get_env doc_blame
+apply_nolint tactic.get_local_type doc_blame
+apply_nolint tactic.get_main_tag doc_blame
+apply_nolint tactic.get_options doc_blame
+apply_nolint tactic.has_opt_auto_param doc_blame
+apply_nolint tactic.has_opt_auto_param_for_apply doc_blame
+apply_nolint tactic.induction' doc_blame
+apply_nolint tactic.intro_core doc_blame
+apply_nolint tactic.intron doc_blame
+apply_nolint tactic.introv doc_blame
+apply_nolint tactic.is_proof doc_blame
+apply_nolint tactic.is_prop doc_blame
+apply_nolint tactic.is_trace_enabled_for doc_blame
+apply_nolint tactic.istep doc_blame unused_arguments
+apply_nolint tactic.main_goal doc_blame
+apply_nolint tactic.match_and doc_blame
+apply_nolint tactic.match_app_of doc_blame
+apply_nolint tactic.match_eq doc_blame
+apply_nolint tactic.match_heq doc_blame
+apply_nolint tactic.match_iff doc_blame
+apply_nolint tactic.match_ne doc_blame
+apply_nolint tactic.match_not doc_blame
+apply_nolint tactic.match_or doc_blame
+apply_nolint tactic.match_refl_app doc_blame
+apply_nolint tactic.mk_id_eq doc_blame
+apply_nolint tactic.mk_id_proof doc_blame
+apply_nolint tactic.mk_local' doc_blame
+apply_nolint tactic.mk_local_def doc_blame
+apply_nolint tactic.mk_local_pis doc_blame
+apply_nolint tactic.mk_meta_univ doc_blame
+apply_nolint tactic.mk_meta_var doc_blame
+apply_nolint tactic.new_aux_decl_name doc_blame
+apply_nolint tactic.pp doc_blame
+apply_nolint tactic.rename doc_blame
+apply_nolint tactic.replace_target doc_blame
+apply_nolint tactic.returnex doc_blame
+apply_nolint tactic.returnopt doc_blame
+apply_nolint tactic.revert_all doc_blame
+apply_nolint tactic.revert_kdeps doc_blame
+apply_nolint tactic.rexact doc_blame
+apply_nolint tactic.save_const_type_info doc_blame
+apply_nolint tactic.save_info doc_blame
+apply_nolint tactic.save_info_thunk doc_blame
+apply_nolint tactic.save_options doc_blame
+apply_nolint tactic.seq_focus doc_blame
+apply_nolint tactic.set_main_tag doc_blame
+apply_nolint tactic.set_options doc_blame
+apply_nolint tactic.subst doc_blame
+apply_nolint tactic.subst_core doc_blame
+apply_nolint tactic.success_if_fail doc_blame
+apply_nolint tactic.tag has_inhabited_instance
+apply_nolint tactic.timetac doc_blame
+apply_nolint tactic.to_expr_strict doc_blame
+apply_nolint tactic.trace doc_blame
+apply_nolint tactic.trace_call_stack doc_blame
+apply_nolint tactic.trace_result doc_blame
+apply_nolint tactic.trace_state doc_blame
+apply_nolint tactic.triv doc_blame
+apply_nolint tactic.try doc_blame
+apply_nolint tactic.try_apply_opt_auto_param doc_blame
+apply_nolint tactic.try_apply_opt_auto_param_for_apply doc_blame
+apply_nolint tactic.try_core doc_blame
+apply_nolint tactic.try_lst doc_blame
+apply_nolint tactic.up doc_blame
+apply_nolint tactic.updateex_env doc_blame
+apply_nolint tactic.whnf_no_delta doc_blame
+apply_nolint tactic.whnf_target doc_blame
+apply_nolint tactic.with_enable_tags doc_blame
+apply_nolint tactic_format_expr doc_blame
+apply_nolint tactic_result doc_blame
+apply_nolint tactic_state doc_blame
+apply_nolint tactic_state.env doc_blame
+apply_nolint tactic_state.get_options doc_blame
+apply_nolint tactic_state.set_options doc_blame
+
+-- library/init/meta/task.lean
+apply_nolint task.bind doc_blame
+apply_nolint task.delay doc_blame
+apply_nolint task.flatten doc_blame
+apply_nolint task.get doc_blame
+apply_nolint task.map doc_blame
+apply_nolint task.pure doc_blame
+
+-- library/init/meta/type_context.lean
+apply_nolint tactic.unsafe.type_context.bind doc_blame
+apply_nolint tactic.unsafe.type_context.fail doc_blame
+apply_nolint tactic.unsafe.type_context.failure doc_blame
+apply_nolint tactic.unsafe.type_context.get_env doc_blame
+apply_nolint tactic.unsafe.type_context.instantiate_mvars doc_blame
+apply_nolint tactic.unsafe.type_context.is_assigned doc_blame
+apply_nolint tactic.unsafe.type_context.is_def_eq doc_blame
+apply_nolint tactic.unsafe.type_context.is_regular_mvar doc_blame
+apply_nolint tactic.unsafe.type_context.is_tmp_mvar doc_blame
+apply_nolint tactic.unsafe.type_context.level.instantiate_mvars doc_blame
+apply_nolint tactic.unsafe.type_context.level.mk_tmp_mvar doc_blame
+apply_nolint tactic.unsafe.type_context.level.tmp_get_assignment doc_blame
+apply_nolint tactic.unsafe.type_context.level.tmp_is_assigned doc_blame
+apply_nolint tactic.unsafe.type_context.list_mvars doc_blame
+apply_nolint tactic.unsafe.type_context.mk_tmp_mvar doc_blame
+apply_nolint tactic.unsafe.type_context.orelse doc_blame
+apply_nolint tactic.unsafe.type_context.pop_local doc_blame
+apply_nolint tactic.unsafe.type_context.print_mvars doc_blame
+apply_nolint tactic.unsafe.type_context.pure doc_blame
+apply_nolint tactic.unsafe.type_context.tmp_get_assignment doc_blame
+apply_nolint tactic.unsafe.type_context.tmp_is_assigned doc_blame
+apply_nolint tactic.unsafe.type_context.trace doc_blame
+apply_nolint tactic.unsafe.type_context.unify doc_blame
+apply_nolint tactic.unsafe.type_context.whnf doc_blame
+
+-- library/init/meta/vm.lean
+apply_nolint vm doc_blame
+apply_nolint vm.get_env doc_blame
+apply_nolint vm.get_line doc_blame
+apply_nolint vm.get_options doc_blame
+apply_nolint vm.get_override doc_blame
+apply_nolint vm.put_str doc_blame
+apply_nolint vm.stack_size doc_blame
+apply_nolint vm.trace doc_blame
+apply_nolint vm_core doc_blame
+apply_nolint vm_core.bind doc_blame
+apply_nolint vm_core.map doc_blame
+apply_nolint vm_core.ret doc_blame
+apply_nolint vm_decl doc_blame
+apply_nolint vm_decl.kind doc_blame
+apply_nolint vm_decl.to_name doc_blame
+apply_nolint vm_decl_kind doc_blame
+apply_nolint vm_obj doc_blame
+apply_nolint vm_obj.kind doc_blame
+apply_nolint vm_obj_kind doc_blame
+
+-- library/init/meta/well_founded_tactics.lean
+apply_nolint well_founded_tactics.cancel_nat_add_lt doc_blame
+apply_nolint well_founded_tactics.check_target_is_value_lt doc_blame
+apply_nolint well_founded_tactics.clear_internals doc_blame
+apply_nolint well_founded_tactics.default doc_blame
+apply_nolint well_founded_tactics.default_dec_tac doc_blame
+apply_nolint well_founded_tactics.is_psigma_mk doc_blame
+apply_nolint well_founded_tactics.process_lex doc_blame
+apply_nolint well_founded_tactics.trivial_nat_lt doc_blame
+apply_nolint well_founded_tactics.unfold_sizeof doc_blame
+apply_nolint well_founded_tactics.unfold_wf_rel doc_blame
+
+-- library/init/propext.lean
+apply_nolint propext doc_blame
+
+-- library/init/util.lean
+apply_nolint scope_trace unused_arguments
+apply_nolint timeit unused_arguments
+apply_nolint trace unused_arguments
+apply_nolint trace_val doc_blame
+apply_nolint try_for unused_arguments
+apply_nolint unchecked_cast doc_blame
+apply_nolint undefined doc_blame
+
+-- library/init/version.lean
+apply_nolint lean.githash doc_blame
+apply_nolint lean.is_release doc_blame
+apply_nolint lean.version doc_blame
+
+-- library/init/wf.lean
+apply_nolint acc doc_blame
+apply_nolint acc.inv def_lemma doc_blame
+apply_nolint empty_wf def_lemma
+apply_nolint has_well_founded doc_blame
+apply_nolint has_well_founded_of_has_sizeof instance_priority
+apply_nolint inv_image.accessible def_lemma doc_blame
+apply_nolint inv_image.wf def_lemma doc_blame
+apply_nolint measure doc_blame
+apply_nolint measure_wf def_lemma doc_blame
+apply_nolint nat.lt_wf def_lemma
+apply_nolint prod.lex doc_blame
+apply_nolint prod.lex_accessible def_lemma doc_blame
+apply_nolint prod.lex_wf def_lemma doc_blame
+apply_nolint prod.rprod doc_blame
+apply_nolint prod.rprod_sub_lex def_lemma doc_blame
+apply_nolint prod.rprod_wf def_lemma doc_blame
+apply_nolint sizeof_measure doc_blame
+apply_nolint sizeof_measure_wf def_lemma doc_blame
+apply_nolint subrelation.accessible def_lemma doc_blame
+apply_nolint subrelation.wf def_lemma doc_blame
+apply_nolint tc.accessible def_lemma doc_blame
+apply_nolint tc.wf def_lemma doc_blame
+apply_nolint well_founded.apply def_lemma doc_blame
+apply_nolint well_founded.fix_F doc_blame
+apply_nolint well_founded.recursion def_lemma
+
+-- library/system/io.lean
+apply_nolint format.print doc_blame
+apply_nolint format.print_using doc_blame
+apply_nolint io doc_blame
+apply_nolint io.catch doc_blame
+apply_nolint io.cmdline_args doc_blame
+apply_nolint io.deserialize doc_blame
+apply_nolint io.env.get doc_blame
+apply_nolint io.fail doc_blame
+apply_nolint io.finally doc_blame
+apply_nolint io.forever doc_blame
+apply_nolint io.fs.close doc_blame
+apply_nolint io.fs.dir_exists doc_blame
+apply_nolint io.fs.file_exists doc_blame
+apply_nolint io.fs.flush doc_blame
+apply_nolint io.fs.get_char doc_blame
+apply_nolint io.fs.get_line doc_blame
+apply_nolint io.fs.is_eof doc_blame
+apply_nolint io.fs.mkdir doc_blame
+apply_nolint io.fs.put_char doc_blame
+apply_nolint io.fs.put_str doc_blame
+apply_nolint io.fs.put_str_ln doc_blame
+apply_nolint io.fs.read doc_blame
+apply_nolint io.fs.read_file doc_blame
+apply_nolint io.fs.read_to_end doc_blame
+apply_nolint io.fs.remove doc_blame
+apply_nolint io.fs.rename doc_blame
+apply_nolint io.fs.rmdir doc_blame
+apply_nolint io.fs.write doc_blame
+apply_nolint io.get_line doc_blame
+apply_nolint io.handle doc_blame has_inhabited_instance
+apply_nolint io.iterate doc_blame
+apply_nolint io.mk_file_handle doc_blame
+apply_nolint io.net.accept doc_blame
+apply_nolint io.net.close doc_blame
+apply_nolint io.net.connect doc_blame
+apply_nolint io.net.listen doc_blame
+apply_nolint io.net.recv doc_blame
+apply_nolint io.net.send doc_blame
+apply_nolint io.net.socket doc_blame has_inhabited_instance
+apply_nolint io.print doc_blame
+apply_nolint io.print_ln doc_blame
+apply_nolint io.proc.child doc_blame has_inhabited_instance
+apply_nolint io.proc.child.stderr doc_blame
+apply_nolint io.proc.child.stdin doc_blame
+apply_nolint io.proc.child.stdout doc_blame
+apply_nolint io.proc.sleep doc_blame
+apply_nolint io.proc.spawn doc_blame
+apply_nolint io.proc.wait doc_blame
+apply_nolint io.put_str doc_blame
+apply_nolint io.put_str_ln doc_blame
+apply_nolint io.rand doc_blame
+apply_nolint io.serialize doc_blame
+apply_nolint io.set_rand_gen doc_blame
+apply_nolint io.stderr doc_blame
+apply_nolint io.stdin doc_blame
+apply_nolint io.stdout doc_blame
+apply_nolint io_core doc_blame has_inhabited_instance
+apply_nolint io_rand_nat doc_blame
+apply_nolint pp doc_blame
+apply_nolint pp_using doc_blame
+
+-- library/system/io_interface.lean
+apply_nolint io.error doc_blame has_inhabited_instance
+apply_nolint io.mode doc_blame has_inhabited_instance
+apply_nolint io.process.spawn_args doc_blame has_inhabited_instance
+apply_nolint io.process.stdio doc_blame has_inhabited_instance
+apply_nolint monad_io doc_blame
+apply_nolint monad_io_environment doc_blame
+apply_nolint monad_io_file_system doc_blame
+apply_nolint monad_io_net_system doc_blame
+apply_nolint monad_io_process doc_blame
+apply_nolint monad_io_random doc_blame
+apply_nolint monad_io_serial doc_blame
+apply_nolint monad_io_terminal doc_blame
+
+-- library/system/random.lean
+apply_nolint random_gen doc_blame
+apply_nolint std_gen doc_blame has_inhabited_instance
+apply_nolint std_next doc_blame
+apply_nolint std_range doc_blame
+apply_nolint std_split doc_blame
