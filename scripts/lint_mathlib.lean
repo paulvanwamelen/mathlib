@@ -105,5 +105,6 @@ if results.all (λ r, r.2.2.empty) then pure () else io.fail ""
 
 /-- Runs when called with `lean --run` -/
 meta def main : io unit := do
-tactic.get_mathlib_dir >>= write_nolints_for_decls "nolints.txt" "in mathlib",
-tactic.get_core_dir >>= write_nolints_for_decls "nolints_core.txt" "in core"
+ml ← succeeds $ tactic.get_mathlib_dir >>= write_nolints_for_decls "nolints.txt" "in mathlib",
+core ← succeeds $ tactic.get_core_dir >>= write_nolints_for_decls "nolints_core.txt" "in core",
+guardb $ ml && core
