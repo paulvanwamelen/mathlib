@@ -3,10 +3,10 @@ Copyright (c) 2020 Robert Y. Lewis. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Author: Robert Y. Lewis, Gabriel Ebner
 -/
-
 import tactic.lint
-import system.io  -- these are required
-import all   -- then import everything, to parse the library for failing linters
+import system.io
+import meta.rb_map  -- these are required
+--import all   -- then import everything, to parse the library for failing linters
 
 /-!
 # lint_mathlib
@@ -21,6 +21,20 @@ This is used by the CI script for mathlib.
 
 Usage: `lean --run scripts/lint_mathlib.lean`
 -/
+
+section
+open tactic native
+
+meta def tactic.get_core_dir : tactic string :=
+do e ← get_env,
+  s ← e.decl_olean `true,
+  return $ s.popn_back 22
+
+/-- Returns the declarations considered by the mathlib linter. -/
+meta def tactic.decls_in_directory (dir : string) : tactic (list declaration) := do
+e ← get_env,
+pure $ e.filter $ λ d, e.is_prefix_of_file dir d.to_name
+end
 
 open native
 
@@ -74,19 +88,22 @@ h ← mk_file_handle fn mode.write,
 put_str h contents,
 close h
 
-/-- Runs when called with `lean --run` -/
-meta def main : io unit := do
+meta def write_nolints_for_decls (outfile where_desc dir : string) : io unit := do
 env ← tactic.get_env,
-decls ← lint_mathlib_decls,
+decls ← tactic.decls_in_directory dir,
 linters ← get_linters mathlib_linters,
-mathlib_path_len ← string.length <$> tactic.get_mathlib_dir,
 let non_auto_decls := decls.filter (λ d, ¬ d.is_auto_or_internal env),
 results₀ ← lint_core decls non_auto_decls linters,
-nolint_file ← read_nolints_file,
+nolint_file ← read_nolints_file $ "scripts/" ++ outfile,
 let results := (do
   (linter_name, linter, decls) ← results₀,
   [(linter_name, linter, (nolint_file.find linter_name).foldl rb_map.erase decls)]),
 io.print $ to_string $ format_linter_results env results decls non_auto_decls
-  mathlib_path_len "in mathlib" tt tt,
-io.write_file "nolints.txt" $ to_string $ mk_nolint_file env mathlib_path_len results₀,
+  dir.length where_desc tt tt,
+io.write_file outfile $ to_string $ mk_nolint_file env dir.length results₀,
 if results.all (λ r, r.2.2.empty) then pure () else io.fail ""
+
+/-- Runs when called with `lean --run` -/
+meta def main : io unit := do
+tactic.get_mathlib_dir >>= write_nolints_for_decls "nolints.txt" "in mathlib",
+tactic.get_core_dir >>= write_nolints_for_decls "nolints_core.txt" "in core"

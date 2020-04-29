@@ -16,7 +16,7 @@ pr_title='chore(scripts): update nolints.txt'
 pr_body='I am happy to remove some nolints for you!'
 
 git checkout -b $branch_name
-git add scripts/nolints.txt
+git add scripts/nolints.txt scripts/nolints_core.txt
 git commit -m "$pr_title"
 
 gh_api() {
