@@ -175,9 +175,7 @@ meta def lint (slow : bool := tt) (verbose : bool := tt) (extra : list name := [
 
 /-- Returns the declarations considered by the mathlib linter. -/
 meta def lint_mathlib_decls : tactic (list declaration) := do
-e ← get_env,
-ml ← get_mathlib_dir,
-pure $ e.filter $ λ d, e.is_prefix_of_file ml d.to_name
+get_mathlib_dir >>= tactic.decls_in_directory
 
 /-- Return the message printed by `#lint_mathlib` and a `name_set` containing all declarations
 that fail. -/

@@ -22,20 +22,6 @@ This is used by the CI script for mathlib.
 Usage: `lean --run scripts/lint_mathlib.lean`
 -/
 
-section
-open tactic native
-
-meta def tactic.get_core_dir : tactic string :=
-do e ← get_env,
-  s ← e.decl_olean `true,
-  return $ s.popn_back 22
-
-/-- Returns the declarations considered by the mathlib linter. -/
-meta def tactic.decls_in_directory (dir : string) : tactic (list declaration) := do
-e ← get_env,
-pure $ e.filter $ λ d, e.is_prefix_of_file dir d.to_name
-end
-
 open native
 
 /--
@@ -88,6 +74,12 @@ h ← mk_file_handle fn mode.write,
 put_str h contents,
 close h
 
+/--
+`write_nolints_for_decls outfile where_desc dir` runs the linters on every declaration
+that appears in a file in directory `dir`. It prints the linter results and writes
+a nolints file to `outfile`. `where_desc` is used to describe the target of the lint,
+e.g. "in mathlib" or "in core".
+-/
 meta def write_nolints_for_decls (outfile where_desc dir : string) : io unit := do
 env ← tactic.get_env,
 decls ← tactic.decls_in_directory dir,

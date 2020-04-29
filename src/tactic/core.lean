@@ -1894,11 +1894,22 @@ do e ← get_env,
   s ← e.decl_olean `tactic.reset_instance_cache,
   return $ s.popn_back 17
 
+/-- A hackish way to get the root directory of core Lean. -/
+meta def get_core_dir : tactic string :=
+do e ← get_env,
+  s ← e.decl_olean `true,
+  return $ s.popn_back 22
+
 /-- Checks whether a declaration with the given name is declared in mathlib.
 If you want to run this tactic many times, you should use `environment.is_prefix_of_file` instead,
 since it is expensive to execute `get_mathlib_dir` many times. -/
 meta def is_in_mathlib (n : name) : tactic bool :=
 do ml ← get_mathlib_dir, e ← get_env, return $ e.is_prefix_of_file ml n
+
+/-- `decls_in_directory dir` returns the declarations that appear in files in directory `dir`. -/
+meta def decls_in_directory (dir : string) : tactic (list declaration) := do
+e ← get_env,
+pure $ e.filter $ λ d, e.is_prefix_of_file dir d.to_name
 
 /--
 Runs a tactic by name.
