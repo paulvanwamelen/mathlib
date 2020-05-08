@@ -3,7 +3,6 @@ Copyright (c) 2020 Johan Commelin. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Johan Commelin
 -/
-
 import topology.opens
 import ring_theory.ideal_operations
 import linear_algebra.finsupp
@@ -35,7 +34,7 @@ whereas we denote subsets of prime spectra with `t`, `t'`, etc...
 ## Inspiration/contributors
 
 The contents of this file draw inspiration from
-https://github.com/ramonfmir/lean-scheme
+<https://github.com/ramonfmir/lean-scheme>
 which has contributions from Ramon Fernandez Mir, Kevin Buzzard, Kenny Lau,
 and Chris Hughes (on an earlier repository).
 

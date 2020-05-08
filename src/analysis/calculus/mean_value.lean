@@ -3,7 +3,6 @@ Copyright (c) 2019 Sébastien Gouëzel. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sébastien Gouëzel, Yury Kudryashov
 -/
-
 import analysis.calculus.local_extr
 import analysis.convex.topology
 
@@ -55,7 +54,6 @@ In this file we prove the following facts:
   is increasing or its second derivative is nonnegative, then the original function is convex.
 -/
 
-set_option class.instance_max_depth 120
 
 variables {E : Type*} [normed_group E] [normed_space ℝ E]
           {F : Type*} [normed_group F] [normed_space ℝ F]
@@ -90,7 +88,7 @@ begin
   have A : continuous_on (λ x, (f x, B x)) (Icc a b), from hf.prod hB,
   have : is_closed s,
   { simp only [s, inter_comm],
-    exact A.preimage_closed_of_closed is_closed_Icc (order_closed_topology.is_closed_le' _) },
+    exact A.preimage_closed_of_closed is_closed_Icc order_closed_topology.is_closed_le' },
   apply this.Icc_subset_of_forall_exists_gt ha,
   rintros x ⟨hxB, xab⟩ y hy,
   change f x ≤ B x at hxB,

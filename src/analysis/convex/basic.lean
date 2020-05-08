@@ -3,13 +3,8 @@ Copyright (c) 2019 Alexander Bentkamp. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Alexander Bentkamp, Yury Kudriashov
 -/
-
-import data.complex.basic
 import data.set.intervals
-import tactic.interactive
-import tactic.linarith
-import linear_algebra.basic
-import ring_theory.algebra
+import data.complex.module
 import algebra.pointwise
 
 /-!
@@ -892,7 +887,7 @@ begin
   apply congr_arg,
   convert (subtype.range_val s).symm,
   ext x,
-  simp [linear_map.sum_apply, ite_smul, finset.sum_ite _ _ (λ x, x), finset.filter_eq]
+  simp [linear_map.sum_apply, ite_smul, finset.filter_eq]
 end
 
 /-- All values of a function `f ∈ std_simplex ι` belong to `[0, 1]`. -/

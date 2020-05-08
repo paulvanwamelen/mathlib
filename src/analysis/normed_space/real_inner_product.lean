@@ -3,9 +3,8 @@ Copyright (c) 2019 Zhouhang Zhou. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Zhouhang Zhou
 -/
-
-import analysis.convex.basic algebra.quadratic_discriminant analysis.complex.exponential
-       analysis.specific_limits
+import algebra.quadratic_discriminant
+import analysis.special_functions.pow
 import tactic.monotonicity
 
 
@@ -50,7 +49,6 @@ universes u v w
 
 variables {α : Type u} {F : Type v} {G : Type w}
 
-set_option class.instance_max_depth 40
 
 class has_inner (α : Type*) := (inner : α → α → ℝ)
 
@@ -232,6 +230,9 @@ Existence of minimizers
 Let `u` be a point in an inner product space, and let `K` be a nonempty complete convex subset.
 Then there exists a unique `v` in `K` that minimizes the distance `∥u - v∥` to `u`.
  -/
+-- FIXME this monolithic proof causes a deterministic timeout with `-T50000`
+-- It should be broken in a sequence of more manageable pieces,
+-- perhaps with individual statements for the three steps below.
 theorem exists_norm_eq_infi_of_complete_convex {K : set α} (ne : K.nonempty) (h₁ : is_complete K)
   (h₂ : convex K) : ∀ u : α, ∃ v ∈ K, ∥u - v∥ = ⨅ w : K, ∥u - w∥ := assume u,
 begin

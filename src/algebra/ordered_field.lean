@@ -3,7 +3,8 @@ Copyright (c) 2018 Mario Carneiro. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Mario Carneiro
 -/
-import algebra.ordered_ring algebra.field
+import algebra.ordered_ring
+import algebra.field
 
 section linear_ordered_field
 variables {α : Type*} [linear_ordered_field α] {a b c d : α}
@@ -183,9 +184,6 @@ lemma div_le_div_of_le_left {a b c : α} (ha : 0 ≤ a) (hc : 0 < c) (h : c ≤ 
 by haveI := classical.dec_eq α; exact
 if ha0 : a = 0 then by simp [ha0]
 else (div_le_div_left (lt_of_le_of_ne ha (ne.symm ha0)) (lt_of_lt_of_le hc h) hc).2 h
-
-lemma inv_neg : (-a)⁻¹ = -(a⁻¹) :=
-by rwa [inv_eq_one_div, inv_eq_one_div, div_neg_eq_neg_div]
 
 lemma inv_le_inv_of_le {a b : α} (hb : 0 < b) (h : b ≤ a) : a⁻¹ ≤ b⁻¹ :=
 begin

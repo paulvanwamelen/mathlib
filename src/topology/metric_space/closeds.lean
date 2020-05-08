@@ -3,8 +3,8 @@ Copyright (c) 2019 Sébastien Gouëzel. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Author: Sébastien Gouëzel
 -/
-
-import topology.metric_space.hausdorff_distance topology.opens analysis.specific_limits
+import topology.metric_space.hausdorff_distance
+import analysis.specific_limits
 
 /-!
 # Closed subsets
@@ -119,7 +119,7 @@ begin
       { assume l z,
         obtain ⟨z', z'_mem, hz'⟩ : ∃ z' ∈ (s (n+l+1)).val, edist (z:α) z' < B n / 2^l,
         { apply exists_edist_lt_of_Hausdorff_edist_lt z.2,
-          simp only [B, ennreal.div_def, ennreal.inv_pow'],
+          simp only [B, ennreal.div_def, ennreal.inv_pow],
           rw [← pow_add],
           apply hs; simp },
         exact ⟨⟨z', z'_mem⟩, le_of_lt hz'⟩ },
@@ -310,7 +310,7 @@ begin
     let v : set (nonempty_compacts α) := {t : nonempty_compacts α | t.val ∈ v0},
     refine  ⟨⟨v, ⟨_, _⟩⟩⟩,
     { have : countable (subtype.val '' v),
-      { refine countable_subset (λx hx, _) (countable_set_of_finite_subset cs),
+      { refine (countable_set_of_finite_subset cs).mono (λx hx, _),
         rcases (mem_image _ _ _).1 hx with ⟨y, ⟨hy, yx⟩⟩,
         rw ← yx,
         exact hy },

@@ -3,9 +3,9 @@ Copyright (c) 2018 Chris Hughes. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Chris Hughes, Abhimanyu Pallavi Sudhir
 -/
-import algebra.archimedean algebra.geom_sum
-import data.nat.choose data.complex.basic
-import tactic.linarith
+import algebra.geom_sum
+import data.nat.choose
+import data.complex.basic
 
 local notation `abs'` := _root_.abs
 open is_absolute_value
@@ -147,7 +147,7 @@ begin
   have r_pos : 0 < r := lt_of_le_of_ne hr0 (ne.symm r_ne_zero),
   replace hk : m = k + n.succ := (nat.sub_eq_iff_eq_add hmn).1 hk,
   induction k with k ih generalizing m n,
-  { rw [hk, zero_add, mul_right_comm, ← pow_inv _ _ r_ne_zero, ← div_eq_mul_inv, mul_div_cancel],
+  { rw [hk, zero_add, mul_right_comm, inv_pow' _ _, ← div_eq_mul_inv, mul_div_cancel],
     exact (ne_of_lt (pow_pos r_pos _)).symm },
   { have kn : k + n.succ ≥ n.succ, by rw ← zero_add n.succ; exact add_le_add (zero_le _) (by simp),
     rw [hk, nat.succ_add, pow_succ' r, ← mul_assoc],
@@ -850,7 +850,7 @@ calc x + 1 ≤ lim (⟨(λ n : ℕ, ((exp' x) n).re), is_cau_seq_re (exp' x)⟩ 
           add_re, add_re, h₁, h₂, add_assoc,
           ← @sum_hom _ _ _ _ _ _ _ complex.re
             (is_add_group_hom.to_is_add_monoid_hom _)],
-        refine le_add_of_nonneg_of_le (sum_nonneg (λ m hm, _)) (le_refl _), dsimp [-nat.fact_succ],
+        refine le_add_of_nonneg_of_le (sum_nonneg (λ m hm, _)) (le_refl _),
         rw [← of_real_pow, ← of_real_nat_cast, ← of_real_div, of_real_re],
         exact div_nonneg (pow_nonneg hx _) (nat.cast_pos.2 (nat.fact_pos _)),
       end⟩)

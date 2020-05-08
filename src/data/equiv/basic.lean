@@ -8,7 +8,8 @@ We say two types are equivalent if they are isomorphic.
 
 Two equivalent types have the same cardinality.
 -/
-import tactic.split_ifs logic.function logic.unique data.set.function data.bool data.quot
+import data.set.function
+import data.option.basic
 
 open function
 
@@ -24,7 +25,8 @@ structure equiv (α : Sort*) (β : Sort*) :=
 
 infix ` ≃ `:25 := equiv
 
-def function.involutive.to_equiv {f : α → α} (h : involutive f) : α ≃ α :=
+/-- Convert an involutive function `f` to an equivalence with `to_fun = inv_fun = f`. -/
+def function.involutive.to_equiv (f : α → α) (h : involutive f) : α ≃ α :=
 ⟨f, f, h.left_inverse, h.right_inverse⟩
 
 namespace equiv
@@ -60,6 +62,12 @@ equiv.ext _ _ H
 @[trans] protected def trans (e₁ : α ≃ β) (e₂ : β ≃ γ) : α ≃ γ :=
 ⟨e₂.to_fun ∘ e₁.to_fun, e₁.inv_fun ∘ e₂.inv_fun,
   e₂.left_inv.comp e₁.left_inv, e₂.right_inv.comp e₁.right_inv⟩
+
+@[simp]
+lemma to_fun_as_coe (e : α ≃ β) (a : α) : e.to_fun a = e a := rfl
+
+@[simp]
+lemma inv_fun_as_coe (e : α ≃ β) (b : β) : e.inv_fun b = e.symm b := rfl
 
 protected theorem injective : ∀ f : α ≃ β, injective f
 | ⟨f, g, h₁, h₂⟩ := injective_of_left_inverse h₁
@@ -104,6 +112,13 @@ rfl
 @[simp] theorem apply_eq_iff_eq : ∀ (f : α ≃ β) (x y : α), f x = f y ↔ x = y
 | ⟨f₁, g₁, l₁, r₁⟩ x y := (injective_of_left_inverse l₁).eq_iff
 
+theorem apply_eq_iff_eq_symm_apply {α β : Sort*} (f : α ≃ β) (x : α) (y : β) :
+  f x = y ↔ x = f.symm y :=
+begin
+  conv_lhs { rw ←apply_symm_apply f y, },
+  rw apply_eq_iff_eq,
+end
+
 @[simp] theorem cast_apply {α β} (h : α = β) (x : α) : equiv.cast h x = cast h x := rfl
 
 lemma symm_apply_eq {α β} (e : α ≃ β) {x y} : e.symm x = y ↔ x = e y :=
@@ -113,8 +128,6 @@ lemma eq_symm_apply {α β} (e : α ≃ β) {x y} : y = e.symm x ↔ e y = x :=
 (eq_comm.trans e.symm_apply_eq).trans eq_comm
 
 @[simp] theorem symm_symm (e : α ≃ β) : e.symm.symm = e := by { cases e, refl }
-
-@[simp] theorem symm_symm_apply (e : α ≃ β) (a : α) : e.symm.symm a = e a := by { cases e, refl }
 
 @[simp] theorem trans_refl (e : α ≃ β) : e.trans (equiv.refl β) = e := by { cases e, refl }
 
@@ -219,12 +232,19 @@ protected def ulift {α : Type u} : ulift α ≃ α :=
 protected def plift : plift α ≃ α :=
 ⟨plift.down, plift.up, plift.up_down, plift.down_up⟩
 
+/-- equivalence of propositions is the same as iff -/
+def of_iff {P Q : Prop} (h : P ↔ Q) : P ≃ Q :=
+{ to_fun := h.mp,
+  inv_fun := h.mpr,
+  left_inv := λ x, rfl,
+  right_inv := λ y, rfl }
+
 @[congr] def arrow_congr {α₁ β₁ α₂ β₂ : Sort*} (e₁ : α₁ ≃ α₂) (e₂ : β₁ ≃ β₂) :
   (α₁ → β₁) ≃ (α₂ → β₂) :=
 { to_fun := λ f, e₂.to_fun ∘ f ∘ e₁.inv_fun,
   inv_fun := λ f, e₂.inv_fun ∘ f ∘ e₁.to_fun,
-  left_inv := λ f, funext $ λ x, by { dsimp, rw [e₂.left_inv, e₁.left_inv] },
-  right_inv := λ f, funext $ λ x, by { dsimp, rw [e₂.right_inv, e₁.right_inv] } }
+  left_inv := λ f, funext $ λ x, by { dsimp, simp },
+  right_inv := λ f, funext $ λ x, by { dsimp, simp } }
 
 @[simp] lemma arrow_congr_apply {α₁ β₁ α₂ β₂ : Sort*} (e₁ : α₁ ≃ α₂) (e₂ : β₁ ≃ β₂)
   (f : α₁ → β₁) (x : α₂) :
@@ -246,6 +266,33 @@ rfl
 
 @[simp] lemma arrow_congr_symm {α₁ β₁ α₂ β₂ : Sort*} (e₁ : α₁ ≃ α₂) (e₂ : β₁ ≃ β₂) :
   (arrow_congr e₁ e₂).symm = arrow_congr e₁.symm e₂.symm :=
+rfl
+
+/--
+A version of `equiv.arrow_congr` in `Type`, rather than `Sort`.
+
+The `equiv_rw` tactic is not able to use the default `Sort` level `equiv.arrow_congr`,
+because Lean's universe rules will not unify `?l_1` with `imax (1 ?m_1)`.
+-/
+@[congr]
+def arrow_congr' {α₁ β₁ α₂ β₂ : Type*} (hα : α₁ ≃ α₂) (hβ : β₁ ≃ β₂) : (α₁ → β₁) ≃ (α₂ → β₂) :=
+equiv.arrow_congr hα hβ
+
+@[simp] lemma arrow_congr'_apply {α₁ β₁ α₂ β₂ : Type*} (e₁ : α₁ ≃ α₂) (e₂ : β₁ ≃ β₂)
+  (f : α₁ → β₁) (x : α₂) :
+  arrow_congr' e₁ e₂ f x = (e₂ $ f $ e₁.symm x) :=
+rfl
+
+@[simp] lemma arrow_congr'_refl {α β : Type*} :
+  arrow_congr' (equiv.refl α) (equiv.refl β) = equiv.refl (α → β) := rfl
+
+@[simp] lemma arrow_congr'_trans {α₁ β₁ α₂ β₂ α₃ β₃ : Type*}
+  (e₁ : α₁ ≃ α₂) (e₁' : β₁ ≃ β₂) (e₂ : α₂ ≃ α₃) (e₂' : β₂ ≃ β₃) :
+  arrow_congr' (e₁.trans e₂) (e₁'.trans e₂') = (arrow_congr' e₁ e₁').trans (arrow_congr' e₂ e₂') :=
+rfl
+
+@[simp] lemma arrow_congr'_symm {α₁ β₁ α₂ β₂ : Type*} (e₁ : α₁ ≃ α₂) (e₂ : β₁ ≃ β₂) :
+  (arrow_congr' e₁ e₂).symm = arrow_congr' e₁.symm e₂.symm :=
 rfl
 
 def conj (e : α ≃ β) : (α → α) ≃ (β → β) := arrow_congr e e
@@ -273,26 +320,26 @@ def punit_equiv_punit : punit.{v} ≃ punit.{w} :=
 ⟨λ _, punit.star, λ _, punit.star, λ u, by { cases u, refl }, λ u, by { cases u, reflexivity }⟩
 
 section
-@[simp] def arrow_punit_equiv_punit (α : Sort*) : (α → punit.{v}) ≃ punit.{w} :=
+def arrow_punit_equiv_punit (α : Sort*) : (α → punit.{v}) ≃ punit.{w} :=
 ⟨λ f, punit.star, λ u f, punit.star,
   λ f, by { funext x, cases f x, refl }, λ u, by { cases u, reflexivity }⟩
 
-@[simp] def punit_arrow_equiv (α : Sort*) : (punit.{u} → α) ≃ α :=
+def punit_arrow_equiv (α : Sort*) : (punit.{u} → α) ≃ α :=
 ⟨λ f, f punit.star, λ a u, a, λ f, by { funext x, cases x, refl }, λ u, rfl⟩
 
-@[simp] def empty_arrow_equiv_punit (α : Sort*) : (empty → α) ≃ punit.{u} :=
+def empty_arrow_equiv_punit (α : Sort*) : (empty → α) ≃ punit.{u} :=
 ⟨λ f, punit.star, λ u e, e.rec _, λ f, funext $ λ x, x.rec _, λ u, by { cases u, refl }⟩
 
-@[simp] def pempty_arrow_equiv_punit (α : Sort*) : (pempty → α) ≃ punit.{u} :=
+def pempty_arrow_equiv_punit (α : Sort*) : (pempty → α) ≃ punit.{u} :=
 ⟨λ f, punit.star, λ u e, e.rec _, λ f, funext $ λ x, x.rec _, λ u, by { cases u, refl }⟩
 
-@[simp] def false_arrow_equiv_punit (α : Sort*) : (false → α) ≃ punit.{u} :=
+def false_arrow_equiv_punit (α : Sort*) : (false → α) ≃ punit.{u} :=
 calc (false → α) ≃ (empty → α) : arrow_congr false_equiv_empty (equiv.refl _)
              ... ≃ punit       : empty_arrow_equiv_punit _
 
 end
 
-@[congr] def prod_congr {α₁ β₁ α₂ β₂ : Sort*} (e₁ : α₁ ≃ α₂) (e₂ :β₁ ≃ β₂) : α₁ × β₁ ≃ α₂ × β₂ :=
+@[congr] def prod_congr {α₁ β₁ α₂ β₂ : Sort*} (e₁ : α₁ ≃ α₂) (e₂ : β₁ ≃ β₂) : α₁ × β₁ ≃ α₂ × β₂ :=
 ⟨λp, (e₁ p.1, e₂ p.2), λp, (e₁.symm p.1, e₂.symm p.2),
    λ ⟨a, b⟩, show (e₁.symm (e₁ a), e₂.symm (e₂ b)) = (a, b), by rw [symm_apply_apply, symm_apply_apply],
    λ ⟨a, b⟩, show (e₁ (e₁.symm a), e₂ (e₂.symm b)) = (a, b), by rw [apply_symm_apply, apply_symm_apply]⟩
@@ -301,37 +348,39 @@ end
   prod_congr e₁ e₂ (a, b) = (e₁ a, e₂ b) :=
 rfl
 
-@[simp] def prod_comm (α β : Sort*) : α × β ≃ β × α :=
+def prod_comm (α β : Sort*) : α × β ≃ β × α :=
 ⟨λ p, (p.2, p.1), λ p, (p.2, p.1), λ⟨a, b⟩, rfl, λ⟨a, b⟩, rfl⟩
 
-@[simp] def prod_assoc (α β γ : Sort*) : (α × β) × γ ≃ α × (β × γ) :=
+@[simp] lemma prod_comm_apply {α β} (a b) : prod_comm α β ⟨a, b⟩ = ⟨b, a⟩ := rfl
+
+def prod_assoc (α β γ : Sort*) : (α × β) × γ ≃ α × (β × γ) :=
 ⟨λ p, ⟨p.1.1, ⟨p.1.2, p.2⟩⟩, λp, ⟨⟨p.1, p.2.1⟩, p.2.2⟩, λ ⟨⟨a, b⟩, c⟩, rfl, λ ⟨a, ⟨b, c⟩⟩, rfl⟩
 
 @[simp] theorem prod_assoc_apply {α β γ : Sort*} (p : (α × β) × γ) :
   prod_assoc α β γ p = ⟨p.1.1, ⟨p.1.2, p.2⟩⟩ := rfl
 
 section
-@[simp] def prod_punit (α : Sort*) : α × punit.{u+1} ≃ α :=
+def prod_punit (α : Sort*) : α × punit.{u+1} ≃ α :=
 ⟨λ p, p.1, λ a, (a, punit.star), λ ⟨_, punit.star⟩, rfl, λ a, rfl⟩
 
 @[simp] theorem prod_punit_apply {α : Sort*} (a : α × punit.{u+1}) : prod_punit α a = a.1 := rfl
 
-@[simp] def punit_prod (α : Sort*) : punit.{u+1} × α ≃ α :=
+def punit_prod (α : Sort*) : punit.{u+1} × α ≃ α :=
 calc punit × α ≃ α × punit : prod_comm _ _
            ... ≃ α         : prod_punit _
 
 @[simp] theorem punit_prod_apply {α : Sort*} (a : punit.{u+1} × α) : punit_prod α a = a.2 := rfl
 
-@[simp] def prod_empty (α : Sort*) : α × empty ≃ empty :=
+def prod_empty (α : Sort*) : α × empty ≃ empty :=
 equiv_empty (λ ⟨_, e⟩, e.rec _)
 
-@[simp] def empty_prod (α : Sort*) : empty × α ≃ empty :=
+def empty_prod (α : Sort*) : empty × α ≃ empty :=
 equiv_empty (λ ⟨e, _⟩, e.rec _)
 
-@[simp] def prod_pempty (α : Sort*) : α × pempty ≃ pempty :=
+def prod_pempty (α : Sort*) : α × pempty ≃ pempty :=
 equiv_pempty (λ ⟨_, e⟩, e.rec _)
 
-@[simp] def pempty_prod (α : Sort*) : pempty × α ≃ pempty :=
+def pempty_prod (α : Sort*) : pempty × α ≃ pempty :=
 equiv_pempty (λ ⟨e, _⟩, e.rec _)
 end
 
@@ -372,13 +421,17 @@ noncomputable def Prop_equiv_bool : Prop ≃ bool :=
 ⟨λ p, @to_bool p (classical.prop_decidable _),
  λ b, b, λ p, by simp, λ b, by simp⟩
 
-@[simp] def sum_comm (α β : Sort*) : α ⊕ β ≃ β ⊕ α :=
+def sum_comm (α β : Sort*) : α ⊕ β ≃ β ⊕ α :=
 ⟨λ s, match s with inl a := inr a | inr b := inl b end,
  λ s, match s with inl b := inr b | inr a := inl a end,
  λ s, by cases s; refl,
  λ s, by cases s; refl⟩
 
-@[simp] def sum_assoc (α β γ : Sort*) : (α ⊕ β) ⊕ γ ≃ α ⊕ (β ⊕ γ) :=
+@[simp] lemma sum_comm_apply_inl (α β) (a) : sum_comm α β (sum.inl a) = sum.inr a := rfl
+@[simp] lemma sum_comm_apply_inr (α β) (b) : sum_comm α β (sum.inr b) = sum.inl b := rfl
+@[simp] lemma sum_comm_symm (α β) : (sum_comm α β).symm = sum_comm β α := by ext x; cases x; refl
+
+def sum_assoc (α β γ : Sort*) : (α ⊕ β) ⊕ γ ≃ α ⊕ (β ⊕ γ) :=
 ⟨λ s, match s with inl (inl a) := inl a | inl (inr b) := inr (inl b) | inr c := inr (inr c) end,
  λ s, match s with inl a := inl (inl a) | inr (inl b) := inl (inr b) | inr (inr c) := inr c end,
  λ s, by rcases s with ⟨_ | _⟩ | _; refl,
@@ -388,29 +441,48 @@ noncomputable def Prop_equiv_bool : Prop ≃ bool :=
 @[simp] theorem sum_assoc_apply_in2 {α β γ} (b) : sum_assoc α β γ (inl (inr b)) = inr (inl b) := rfl
 @[simp] theorem sum_assoc_apply_in3 {α β γ} (c) : sum_assoc α β γ (inr c) = inr (inr c) := rfl
 
-@[simp] def sum_empty (α : Sort*) : α ⊕ empty ≃ α :=
+def sum_empty (α : Sort*) : α ⊕ empty ≃ α :=
 ⟨λ s, match s with inl a := a | inr e := empty.rec _ e end,
  inl,
  λ s, by { rcases s with _ | ⟨⟨⟩⟩, refl },
  λ a, rfl⟩
 
-@[simp] def empty_sum (α : Sort*) : empty ⊕ α ≃ α :=
+@[simp] lemma sum_empty_apply_inl {α} (a) : sum_empty α (sum.inl a) = a := rfl
+
+def empty_sum (α : Sort*) : empty ⊕ α ≃ α :=
 (sum_comm _ _).trans $ sum_empty _
 
-@[simp] def sum_pempty (α : Sort*) : α ⊕ pempty ≃ α :=
+@[simp] lemma empty_sum_apply_inr {α} (a) : empty_sum α (sum.inr a) = a := rfl
+
+def sum_pempty (α : Sort*) : α ⊕ pempty ≃ α :=
 ⟨λ s, match s with inl a := a | inr e := pempty.rec _ e end,
  inl,
  λ s, by { rcases s with _ | ⟨⟨⟩⟩, refl },
  λ a, rfl⟩
 
-@[simp] def pempty_sum (α : Sort*) : pempty ⊕ α ≃ α :=
+@[simp] lemma sum_pempty_apply_inl {α} (a) : sum_pempty α (sum.inl a) = a := rfl
+
+def pempty_sum (α : Sort*) : pempty ⊕ α ≃ α :=
 (sum_comm _ _).trans $ sum_pempty _
 
-@[simp] def option_equiv_sum_punit (α : Sort*) : option α ≃ α ⊕ punit.{u+1} :=
+@[simp] lemma pempty_sum_apply_inr {α} (a) : pempty_sum α (sum.inr a) = a := rfl
+
+def option_equiv_sum_punit (α : Sort*) : option α ≃ α ⊕ punit.{u+1} :=
 ⟨λ o, match o with none := inr punit.star | some a := inl a end,
  λ s, match s with inr _ := none | inl a := some a end,
  λ o, by cases o; refl,
  λ s, by rcases s with _ | ⟨⟨⟩⟩; refl⟩
+
+@[simp] lemma option_equiv_sum_punit_none {α} : option_equiv_sum_punit α none = sum.inr () := rfl
+@[simp] lemma option_equiv_sum_punit_some {α} (a) :
+  option_equiv_sum_punit α (some a) = sum.inl a := rfl
+
+/-- The set of `x : option α` such that `is_some x` is equivalent to `α`. -/
+def option_is_some_equiv (α : Type*) : {x : option α // x.is_some} ≃ α :=
+{ to_fun := λ o, option.get o.2,
+  inv_fun := λ x, ⟨some x, dec_trivial⟩,
+  left_inv := λ o, subtype.eq $ option.some_get _,
+  right_inv := λ x, option.get_some _ _ }
 
 def sum_equiv_sigma_bool (α β : Sort*) : α ⊕ β ≃ (Σ b: bool, cond b α β) :=
 ⟨λ s, match s with inl a := ⟨tt, a⟩ | inr b := ⟨ff, b⟩ end,
@@ -418,11 +490,108 @@ def sum_equiv_sigma_bool (α β : Sort*) : α ⊕ β ≃ (Σ b: bool, cond b α 
  λ s, by cases s; refl,
  λ s, by rcases s with ⟨_|_, _⟩; refl⟩
 
+/-- `sigma_preimage_equiv f` for `f : α → β` is the natural equivalence between
+the type of all fibres of `f` and the total space `α`. -/
 def sigma_preimage_equiv {α β : Type*} (f : α → β) :
   (Σ y : β, {x // f x = y}) ≃ α :=
 ⟨λ x, x.2.1, λ x, ⟨f x, x, rfl⟩, λ ⟨y, x, rfl⟩, rfl, λ x, rfl⟩
 
+@[simp] lemma sigma_preimage_equiv_apply {α β : Type*} (f : α → β)
+  (x : Σ y : β, {x // f x = y}) :
+  (sigma_preimage_equiv f) x = x.2.1 := rfl
+
+@[simp] lemma sigma_preimage_equiv_symm_apply_fst {α β : Type*} (f : α → β) (a : α) :
+  ((sigma_preimage_equiv f).symm a).1 = f a := rfl
+
+@[simp] lemma sigma_preimage_equiv_symm_apply_snd_fst {α β : Type*} (f : α → β) (a : α) :
+  ((sigma_preimage_equiv f).symm a).2.1 = a := rfl
+
 end
+
+section sum_compl
+
+/-- For any predicate `p` on `α`,
+the sum of the two subtypes `{a // p a}` and its complement `{a // ¬ p a}`
+is naturally equivalent to `α`. -/
+def sum_compl {α : Type*} (p : α → Prop) [decidable_pred p] :
+  {a // p a} ⊕ {a // ¬ p a} ≃ α :=
+{ to_fun := sum.elim coe coe,
+  inv_fun := λ a, if h : p a then sum.inl ⟨a, h⟩ else sum.inr ⟨a, h⟩,
+  left_inv := by { rintros (⟨x,hx⟩|⟨x,hx⟩); dsimp; [rw dif_pos, rw dif_neg], },
+  right_inv := λ a, by { dsimp, split_ifs; refl } }
+
+@[simp] lemma sum_compl_apply_inl {α : Type*} (p : α → Prop) [decidable_pred p]
+  (x : {a // p a}) :
+  sum_compl p (sum.inl x) = x := rfl
+
+@[simp] lemma sum_compl_apply_inr {α : Type*} (p : α → Prop) [decidable_pred p]
+  (x : {a // ¬ p a}) :
+  sum_compl p (sum.inr x) = x := rfl
+
+@[simp] lemma sum_compl_apply_symm_of_pos {α : Type*} (p : α → Prop) [decidable_pred p]
+  (a : α) (h : p a) :
+  (sum_compl p).symm a = sum.inl ⟨a, h⟩ := dif_pos h
+
+@[simp] lemma sum_compl_apply_symm_of_neg {α : Type*} (p : α → Prop) [decidable_pred p]
+  (a : α) (h : ¬ p a) :
+  (sum_compl p).symm a = sum.inr ⟨a, h⟩ := dif_neg h
+
+end sum_compl
+
+section subtype_preimage
+
+variables (p : α → Prop) [decidable_pred p] (x₀ : {a // p a} → β)
+
+/-- For a fixed function `x₀ : {a // p a} → β` defined on a subtype of `α`,
+the subtype of functions `x : α → β` that agree with `x₀` on the subtype `{a // p a}`
+is naturally equivalent to the type of functions `{a // ¬ p a} → β`. -/
+def subtype_preimage :
+  {x : α → β // x ∘ coe = x₀} ≃ ({a // ¬ p a} → β) :=
+{ to_fun := λ (x : {x : α → β // x ∘ coe = x₀}) a, (x : α → β) a,
+  inv_fun := λ x, ⟨λ a, if h : p a then x₀ ⟨a, h⟩ else x ⟨a, h⟩,
+    funext $ λ ⟨a, h⟩, dif_pos h⟩,
+  left_inv := λ ⟨x, hx⟩, subtype.val_injective $ funext $ λ a,
+    (by { dsimp, split_ifs; [ rw ← hx, skip ]; refl }),
+  right_inv := λ x, funext $ λ ⟨a, h⟩,
+    show dite (p a) _ _ = _, by { dsimp, rw [dif_neg h], refl } }
+
+@[simp] lemma subtype_preimage_apply (x : {x : α → β // x ∘ coe = x₀}) :
+  subtype_preimage p x₀ x = λ a, (x : α → β) a := rfl
+
+@[simp] lemma subtype_preimage_symm_apply_coe (x : {a // ¬ p a} → β) :
+  ((subtype_preimage p x₀).symm x : α → β) =
+    λ a, if h : p a then x₀ ⟨a, h⟩ else x ⟨a, h⟩ := rfl
+
+lemma subtype_preimage_symm_apply_coe_pos (x : {a // ¬ p a} → β) (a : α) (h : p a) :
+  ((subtype_preimage p x₀).symm x : α → β) a = x₀ ⟨a, h⟩ :=
+dif_pos h
+
+lemma subtype_preimage_symm_apply_coe_neg (x : {a // ¬ p a} → β) (a : α) (h : ¬ p a) :
+  ((subtype_preimage p x₀).symm x : α → β) a = x ⟨a, h⟩ :=
+dif_neg h
+
+end subtype_preimage
+
+section fun_unique
+
+variables (α β) [unique α]
+
+/-- If `α` has a unique term, then the type of function `α → β` is equivalent to `β`. -/
+def fun_unique : (α → β) ≃ β :=
+{ to_fun := λ f, f (default α),
+  inv_fun := λ b a, b,
+  left_inv := λ f, funext $ λ a, congr_arg f $ subsingleton.elim _ _,
+  right_inv := λ b, rfl }
+
+variables {α β}
+
+@[simp] lemma fun_unique_apply (f : α → β) :
+  fun_unique α β f = f (default α) := rfl
+
+@[simp] lemma fun_unique_symm_apply (b : β) (a : α) :
+  (fun_unique α β).symm b a = b := rfl
+
+end fun_unique
 
 section
 
@@ -536,7 +705,7 @@ def nat_equiv_nat_sum_punit : ℕ ≃ ℕ ⊕ punit.{u+1} :=
  λ n, begin cases n, repeat { refl } end,
  λ s, begin cases s with a u, { refl }, {cases u, { refl }} end⟩
 
-@[simp] def nat_sum_punit_equiv_nat : ℕ ⊕ punit.{u+1} ≃ ℕ :=
+def nat_sum_punit_equiv_nat : ℕ ⊕ punit.{u+1} ≃ ℕ :=
 nat_equiv_nat_sum_punit.symm
 
 def int_equiv_nat_sum_nat : ℤ ≃ ℕ ⊕ ℕ :=
@@ -785,8 +954,8 @@ protected def prod {α β} (s : set α) (t : set β) :
 
 protected noncomputable def image_of_inj_on {α β} (f : α → β) (s : set α) (H : inj_on f s) :
   s ≃ (f '' s) :=
-⟨λ ⟨x, h⟩, ⟨f x, mem_image_of_mem f h⟩,
- λ ⟨y, h⟩, ⟨classical.some h, (classical.some_spec h).1⟩,
+⟨λ p, ⟨f p, mem_image_of_mem f p.2⟩,
+ λ p, ⟨classical.some p.2, (classical.some_spec p.2).1⟩,
  λ ⟨x, h⟩, subtype.eq (H (classical.some_spec (mem_image_of_mem f h)).1 h
    (classical.some_spec (mem_image_of_mem f h)).2),
  λ ⟨y, h⟩, subtype.eq (classical.some_spec h).2⟩
@@ -870,7 +1039,7 @@ rfl
 if_pos rfl
 
 @[simp] theorem swap_apply_right (a b : α) : swap a b b = a :=
-by { by_cases b = a; simp [swap_apply_def, *] }
+by { by_cases h : b = a; simp [swap_apply_def, h], }
 
 theorem swap_apply_of_ne_of_ne {a b x : α} : x ≠ a → x ≠ b → swap a b x = x :=
 by simp [swap_apply_def] {contextual := tt}
@@ -916,6 +1085,50 @@ begin
   { rw [←f.right_inv x], apply h.mp, apply h₂ },
   apply h.mpr, apply h₂
 end
+protected lemma forall_congr' {p : α → Prop} {q : β → Prop} (f : α ≃ β)
+  (h : ∀{x}, p (f.symm x) ↔ q x) : (∀x, p x) ↔ (∀y, q y) :=
+(equiv.forall_congr f.symm (λ x, h.symm)).symm
+
+-- We next build some higher arity versions of `equiv.forall_congr`.
+-- Although they appear to just be repeated applications of `equiv.forall_congr`,
+-- unification of metavariables works better with these versions.
+-- In particular, they are necessary in `equiv_rw`.
+-- (Stopping at ternary functions seems reasonable: at least in 1-categorical mathematics,
+-- it's rare to have axioms involving more than 3 elements at once.)
+universes ua1 ua2 ub1 ub2 ug1 ug2
+variables {α₁ : Sort ua1} {α₂ : Sort ua2}
+          {β₁ : Sort ub1} {β₂ : Sort ub2}
+          {γ₁ : Sort ug1} {γ₂ : Sort ug2}
+
+protected lemma forall₂_congr {p : α₁ → β₁ → Prop} {q : α₂ → β₂ → Prop} (eα : α₁ ≃ α₂) (eβ : β₁ ≃ β₂)
+  (h : ∀{x y}, p x y ↔ q (eα x) (eβ y)) : (∀x y, p x y) ↔ (∀x y, q x y) :=
+begin
+  apply equiv.forall_congr,
+  intros,
+  apply equiv.forall_congr,
+  intros,
+  apply h,
+end
+protected lemma forall₂_congr' {p : α₁ → β₁ → Prop} {q : α₂ → β₂ → Prop} (eα : α₁ ≃ α₂) (eβ : β₁ ≃ β₂)
+  (h : ∀{x y}, p (eα.symm x) (eβ.symm y) ↔ q x y) : (∀x y, p x y) ↔ (∀x y, q x y) :=
+(equiv.forall₂_congr eα.symm eβ.symm (λ x y, h.symm)).symm
+
+protected lemma forall₃_congr {p : α₁ → β₁ → γ₁ → Prop} {q : α₂ → β₂ → γ₂ → Prop}
+  (eα : α₁ ≃ α₂) (eβ : β₁ ≃ β₂) (eγ : γ₁ ≃ γ₂)
+  (h : ∀{x y z}, p x y z ↔ q (eα x) (eβ y) (eγ z)) : (∀x y z, p x y z) ↔ (∀x y z, q x y z) :=
+begin
+  apply equiv.forall₂_congr,
+  intros,
+  apply equiv.forall_congr,
+  intros,
+  apply h,
+end
+protected lemma forall₃_congr' {p : α₁ → β₁ → γ₁ → Prop} {q : α₂ → β₂ → γ₂ → Prop}
+  (eα : α₁ ≃ α₂) (eβ : β₁ ≃ β₂) (eγ : γ₁ ≃ γ₂)
+  (h : ∀{x y z}, p (eα.symm x) (eβ.symm y) (eγ.symm z) ↔ q x y z) :
+    (∀x y z, p x y z) ↔ (∀x y z, q x y z) :=
+(equiv.forall₃_congr eα.symm eβ.symm eγ.symm (λ x y z, h.symm)).symm
+
 protected lemma forall_congr_left' {p : α → Prop} (f : α ≃ β) :
   (∀x, p x) ↔ (∀y, p (f.symm y)) :=
 equiv.forall_congr f (λx, by simp)
@@ -970,6 +1183,20 @@ of equivalences of the matching fibres.
 def Pi_congr : (Π a, W a) ≃ (Π b, Z b) :=
 (equiv.Pi_congr_right h₂).trans (equiv.Pi_congr_left _ h₁)
 end
+
+section
+variables
+  {W : α → Sort w} {Z : β → Sort z} (h₁ : α ≃ β) (h₂ : Π b : β, (W (h₁.symm b) ≃ Z b))
+
+/--
+Transport dependent functions through
+an equivalence of the base spaces and a family
+of equivalences of the matching fibres.
+-/
+def Pi_congr' : (Π a, W a) ≃ (Π b, Z b) :=
+(Pi_congr h₁.symm (λ b, (h₂ b).symm)).symm
+end
+
 end equiv
 
 instance {α} [subsingleton α] : subsingleton (ulift α) := equiv.ulift.subsingleton

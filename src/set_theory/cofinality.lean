@@ -115,11 +115,11 @@ begin
       exact irrefl _ h } },
   { intro a,
     have : {b : S | ¬ r b a}.nonempty := let ⟨b, bS, ba⟩ := hS a in ⟨⟨b, bS⟩, ba⟩,
-    let b := (is_well_order.wf s).min _ this,
-    have ba : ¬r b a := (is_well_order.wf s).min_mem _ this,
+    let b := (is_well_order.wf).min _ this,
+    have ba : ¬r b a := (is_well_order.wf).min_mem _ this,
     refine ⟨b, ⟨b.2, λ c, not_imp_not.1 $ λ h, _⟩, ba⟩,
     rw [show ∀b:S, (⟨b, b.2⟩:S) = b, by intro b; cases b; refl],
-    exact (is_well_order.wf s).not_lt_min _ this
+    exact (is_well_order.wf).not_lt_min _ this
       (is_order_connected.neg_trans h ba) }
 end
 
@@ -285,8 +285,8 @@ begin
     apply not_le_of_lt (typein_lt_type r a),
     rw [← e', sup_le],
     intro i,
-    simp [set.range] at h,
-    simpa using le_of_lt ((typein_lt_typein r).2 (h _ i rfl)) },
+    have h : ∀ (x : ι), r (enum r (f x) _) a, { simpa using h },
+    simpa only [typein_enum] using le_of_lt ((typein_lt_typein r).2 (h i)) },
   { exact λ i, ⟨_, set.mem_range_self i.1⟩ },
   { intro a, rcases a with ⟨_, i, rfl⟩, exact ⟨⟨i⟩, by simp⟩ }
 end

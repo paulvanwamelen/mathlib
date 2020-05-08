@@ -3,8 +3,8 @@ Copyright (c) 2017 Johannes Hölzl. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Johannes Hölzl, Mario Carneiro, Alexander Bentkamp
 -/
-
-import linear_algebra.basic linear_algebra.finsupp order.zorn
+import linear_algebra.finsupp
+import order.zorn
 import data.fintype.card
 
 /-!
@@ -298,7 +298,7 @@ lemma linear_independent.mono {t s : set M} (h : t ⊆ s) :
   linear_independent R (λ x, x : s → M) → linear_independent R (λ x, x : t → M) :=
 begin
  simp only [linear_independent_subtype_disjoint],
- exact (disjoint_mono_left (finsupp.supported_mono h))
+ exact (disjoint.mono_left (finsupp.supported_mono h))
 end
 
 lemma linear_independent_union {s t : set M}
@@ -393,7 +393,7 @@ begin
     { apply hl },
     { apply ih },
     rw [finset.sup_eq_supr],
-    refine disjoint_mono (le_refl _) _ (hd i _ _ his),
+    refine (hd i _ _ his).mono_right _,
     { simp only [(span_Union _).symm],
       refine span_mono (@supr_le_supr2 (set M) _ _ _ _ _ _),
       rintros ⟨i⟩, exact ⟨i, le_refl _⟩ },
@@ -625,7 +625,7 @@ begin
     { apply linear_independent.to_subtype_range,
       apply linear_independent.image hv',
       simp [ker_inr] },
-    { apply disjoint_mono _ _ disjoint_inl_inr,
+    { apply disjoint_inl_inr.mono _ _,
       { rw [set.range_comp, span_image],
         apply linear_map.map_le_range },
       { rw [set.range_comp, span_image],
@@ -637,7 +637,7 @@ end
 theorem linear_independent_monoid_hom (G : Type*) [monoid G] (L : Type*) [integral_domain L] :
   @linear_independent _ L (G → L) (λ f, f : (G →* L) → (G → L)) _ _ _ :=
 by letI := classical.dec_eq (G →* L);
-   letI : mul_action L L := distrib_mul_action.to_mul_action L L;
+   letI : mul_action L L := distrib_mul_action.to_mul_action;
 -- We prove linear independence by showing that only the trivial linear combination vanishes.
 exact linear_independent_iff'.2
 -- To do this, we use `finset` induction,
@@ -962,7 +962,6 @@ open submodule
    (instead of a data containing type class) -/
 
 section
-set_option class.instance_max_depth 36
 
 lemma mem_span_insert_exchange : x ∈ span K (insert y s) → x ∉ span K s → y ∈ span K (insert x s) :=
 begin
@@ -1160,7 +1159,6 @@ begin
   exact right_inverse_inv_fun (linear_map.range_eq_top.1 hf_surj) _
 end
 
-set_option class.instance_max_depth 49
 open submodule linear_map
 theorem quotient_prod_linear_equiv (p : submodule K V) :
   nonempty ((p.quotient × p) ≃ₗ[K] V) :=
@@ -1228,8 +1226,7 @@ begin
     { convert set.disjoint_singleton_left.2 hiJ,
       rw ←@set_of_mem_eq _ {j},
       refl },
-    refine disjoint_mono h₁ h₂
-      (disjoint_std_basis_std_basis _ _ _ _ h₃), }
+    exact (disjoint_std_basis_std_basis _ _ _ _ h₃).mono h₁ h₂ }
 end
 
 variable [fintype η]

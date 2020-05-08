@@ -50,6 +50,11 @@ namespace antilipschitz_with
 
 variables [emetric_space α] [emetric_space β] [emetric_space γ] {K : ℝ≥0} {f : α → β}
 
+/-- Extract the constant from `hf : antilipschitz_with K f`. This is useful, e.g.,
+if `K` is given by a long formula, and we want to reuse this value. -/
+@[nolint unused_arguments] -- uses neither `f` nor `hf`
+protected def K (hf : antilipschitz_with K f) : ℝ≥0 := K
+
 protected lemma injective (hf : antilipschitz_with K f) :
   function.injective f :=
 λ x y h, by simpa only [h, edist_self, mul_zero, edist_le_zero] using hf x y
@@ -94,7 +99,7 @@ lemma to_right_inv_on (hf : antilipschitz_with K f) {g : β → α} {t : set β}
   lipschitz_with K (t.restrict g) :=
 (hf.restrict univ).to_right_inv_on' (maps_to_univ g t) h
 
-lemma to_inverse (hf : antilipschitz_with K f) {g : β → α} (hg : function.right_inverse g f) :
+lemma to_right_inverse (hf : antilipschitz_with K f) {g : β → α} (hg : function.right_inverse g f) :
   lipschitz_with K g :=
 begin
   intros x y,
@@ -124,7 +129,7 @@ lemma of_subsingleton [subsingleton α] {K : ℝ≥0} : antilipschitz_with K f :
 
 end antilipschitz_with
 
-lemma lipschitz_with.to_inverse [emetric_space α] [emetric_space β] {K : ℝ≥0} {f : α → β}
+lemma lipschitz_with.to_right_inverse [emetric_space α] [emetric_space β] {K : ℝ≥0} {f : α → β}
   (hf : lipschitz_with K f) {g : β → α} (hg : function.right_inverse g f) :
   antilipschitz_with K g :=
 λ x y, by simpa only [hg _] using hf (g x) (g y)
