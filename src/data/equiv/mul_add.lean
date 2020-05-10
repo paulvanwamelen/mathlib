@@ -182,6 +182,8 @@ h.to_add_monoid_hom.map_sub x y
 @[to_additive "The group of additive automorphisms."]
 def mul_aut (M : Type*) [has_mul M] := M ≃* M
 
+attribute [reducible] mul_aut add_aut
+
 namespace mul_aut
 
 variables (M) [has_mul M]
@@ -199,6 +201,9 @@ by refine_struct
 intros; ext; try { refl }; apply equiv.left_inv
 
 instance : inhabited (mul_aut M) := ⟨1⟩
+
+@[simp] lemma coe_mul (e₁ e₂ : mul_aut M) : ⇑(e₁ * e₂) = e₁ ∘ e₂ := rfl
+@[simp] lemma coe_one : ⇑(1 : mul_aut M) = id := rfl
 
 /-- Monoid hom from the group of multiplicative automorphisms to the group of permutations. -/
 def to_perm : mul_aut M →* equiv.perm M :=
@@ -223,6 +228,9 @@ by refine_struct
 intros; ext; try { refl }; apply equiv.left_inv
 
 instance : inhabited (add_aut A) := ⟨1⟩
+
+@[simp] lemma coe_mul (e₁ e₂ : add_aut A) : ⇑(e₁ * e₂) = e₁ ∘ e₂ := rfl
+@[simp] lemma coe_one : ⇑(1 : add_aut A) = id := rfl
 
 /-- Monoid hom from the group of multiplicative automorphisms to the group of permutations. -/
 def to_perm : add_aut A →* equiv.perm A :=

@@ -967,11 +967,11 @@ lemma iterate_mul (m : ℕ) : ∀ n, op^[m * n] = (op^[m]^[n])
 | (n + 1) := by { ext x, simp only [mul_add, mul_one, iterate_one, iterate_add, iterate_mul n] }
 
 @[elab_as_eliminator]
-theorem iterate_ind {α : Type u} (f : α → α) {p : (α → α) → Prop} (hf : p f) (hid : p id)
-  (hcomp : ∀ ⦃f g⦄, p f → p g → p (f ∘ g)) :
+theorem iterate_ind {α : Type u} (f : α → α) {p : (α → α) → Prop} (hid : p id)
+  (hcomp : ∀ ⦃g⦄, p g → p (g ∘ f)) :
   ∀ n, p (f^[n])
 | 0 := hid
-| (n+1) := hcomp (iterate_ind n) hf
+| (n+1) := hcomp (iterate_ind n)
 
 theorem iterate₀ {α : Type u} {op : α → α} {x : α} (H : op x = x) {n : ℕ} :
   op^[n] x = x :=
@@ -1508,17 +1508,17 @@ end nat
 
 namespace function
 
-theorem injective.iterate {α : Type u} {op : α → α} (Hinj : injective op) :
+theorem injective.iterate {α : Type u} {op : α → α} (H : injective op) :
   ∀ n, injective (op^[n]) :=
-nat.iterate_ind op Hinj injective_id $ λ _ _, injective_comp
+nat.iterate_ind op injective_id $ λ g hg, injective_comp hg H
 
-theorem surjective.iterate {α : Type u} {op : α → α} (Hinj : surjective op) :
+theorem surjective.iterate {α : Type u} {op : α → α} (H : surjective op) :
   ∀ n, surjective (op^[n]) :=
-nat.iterate_ind op Hinj surjective_id $ λ _ _, surjective_comp
+nat.iterate_ind op surjective_id $ λ g hg, surjective_comp hg H
 
-theorem bijective.iterate {α : Type u} {op : α → α} (Hinj : bijective op) :
+theorem bijective.iterate {α : Type u} {op : α → α} (H : bijective op) :
   ∀ n, bijective (op^[n]) :=
-nat.iterate_ind op Hinj bijective_id $ λ _ _, bijective_comp
+nat.iterate_ind op bijective_id $ λ g hg, bijective_comp hg H
 
 end function
 
