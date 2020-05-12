@@ -674,8 +674,8 @@ lemma continuous.comp {g : β → γ} {f : α → β} (hg : continuous g) (hf : 
   continuous (g ∘ f) :=
 assume s h, hf _ (hg s h)
 
-lemma continuous.iterate {f : α → α} (hf : continuous f) : ∀ n, continuous (f^[n]) :=
-nat.iterate_ind f continuous_id (λ _ hg, hg.comp hf)
+lemma continuous.iterate {f : α → α} (h : continuous f) (n : ℕ) : continuous (f^[n]) :=
+nat.rec_on n continuous_id (λ n ihn, ihn.comp h)
 
 lemma continuous_at.comp {g : β → γ} {f : α → β} {x : α}
   (hg : continuous_at g (f x)) (hf : continuous_at f x) :
@@ -709,10 +709,11 @@ continuous_const.continuous_at
 lemma continuous_at_id {x : α} : continuous_at id x :=
 continuous_id.continuous_at
 
-lemma continuous_at.iterate {f : α → α} {x : α} (hf : continuous_at f x) (hx : f x = x) :
-  ∀ n, continuous_at (f^[n]) x :=
-@nat.iterate_ind α f (flip continuous_at x) continuous_at_id
-  (λ g hg, flip continuous_at.comp hf $ hx.symm ▸ hg)
+lemma continuous_at.iterate {f : α → α} {x : α} (hf : continuous_at f x) (hx : f x = x) (n : ℕ) :
+  continuous_at (f^[n]) x :=
+nat.rec_on n continuous_at_id $ λ n ihn,
+show continuous_at (f^[n] ∘ f) x,
+from continuous_at.comp (hx.symm ▸ ihn) hf
 
 lemma continuous_iff_is_closed {f : α → β} :
   continuous f ↔ (∀s, is_closed s → is_closed (f ⁻¹' s)) :=
