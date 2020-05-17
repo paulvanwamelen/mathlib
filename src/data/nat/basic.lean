@@ -973,6 +973,9 @@ theorem iterate_add : ∀ (m n : ℕ), op^[m + n] = (op^[m]) ∘ (op^[n])
 | m 0 := rfl
 | m (succ n) := by rw [iterate_succ, iterate_succ, iterate_add]
 
+theorem iterate_add_apply (m n : ℕ) (x : α) : op^[m + n] x = (op^[m] (op^[n] x)) :=
+by rw iterate_add
+
 @[simp] theorem iterate_one : op^[1] = op := funext $ λ a, rfl
 
 theorem iterate_succ' (n : ℕ) : op^[succ n] = op ∘ (op^[n]) :=
@@ -1524,6 +1527,22 @@ by { rw [subsingleton.elim mn (le_trans (le_succ m) smn), decreasing_induction_t
          decreasing_induction_succ'] }
 
 end nat
+
+namespace function
+
+theorem injective.iterate {α : Type u} {op : α → α} (Hinj : injective op) :
+  ∀ n, injective (op^[n]) :=
+nat.iterate_ind op Hinj injective_id $ λ _ _, injective.comp
+
+theorem surjective.iterate {α : Type u} {op : α → α} (Hinj : surjective op) :
+  ∀ n, surjective (op^[n]) :=
+nat.iterate_ind op Hinj surjective_id $ λ _ _, surjective.comp
+
+theorem bijective.iterate {α : Type u} {op : α → α} (Hinj : bijective op) :
+  ∀ n, bijective (op^[n]) :=
+nat.iterate_ind op Hinj bijective_id $ λ _ _, bijective.comp
+
+end function
 
 namespace monoid_hom
 
