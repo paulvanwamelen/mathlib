@@ -963,17 +963,17 @@ by unfold bodd div2; cases bodd_div2 n; refl
 section
 variables {α : Sort*} (op : α → α)
 
-@[simp] theorem iterate_zero (a : α) : op^[0] a = a := rfl
+@[simp] theorem iterate_zero : op^[0] = id := rfl
 
-@[simp] theorem iterate_succ (n : ℕ) (a : α) : op^[succ n] a = (op^[n]) (op a) := rfl
+@[simp] theorem iterate_succ (n : ℕ) : op^[succ n] = (op^[n]) ∘ op := rfl
 
-theorem iterate_add : ∀ (m n : ℕ) (a : α), op^[m + n] a = (op^[m]) (op^[n] a)
-| m 0 a := rfl
-| m (succ n) a := iterate_add m n _
+theorem iterate_add : ∀ (m n : ℕ), op^[m + n] = (op^[m]) ∘ (op^[n])
+| m 0 := rfl
+| m (succ n) := by rw [iterate_succ, iterate_succ, iterate_add]
 
 @[simp] theorem iterate_one : op^[1] = op := funext $ λ a, rfl
 
-theorem iterate_succ' (n : ℕ) (a : α) : op^[succ n] a = op (op^[n] a) :=
+theorem iterate_succ' (n : ℕ) : op^[succ n] = op ∘ (op^[n]) :=
 by rw [← one_add, iterate_add, iterate_one]
 
 lemma iterate_mul (m : ℕ) : ∀ n, op^[m * n] = (op^[m]^[n])
@@ -989,21 +989,21 @@ theorem iterate_ind {α : Type u} (f : α → α) {p : (α → α) → Prop} (hf
 
 theorem iterate₀ {α : Type u} {op : α → α} {x : α} (H : op x = x) {n : ℕ} :
   op^[n] x = x :=
-by induction n; [simp only [iterate_zero], simp only [iterate_succ', H, *]]
+by induction n; [simp only [iterate_zero, id], simp only [iterate_succ', (∘), H, *]]
 
 theorem iterate₁ {α : Type u} {β : Type v} {op : α → α} {op' : β → β} {op'' : α → β}
   (H : ∀ x, op' (op'' x) = op'' (op x)) {n : ℕ} {x : α} :
   op'^[n] (op'' x) = op'' (op^[n] x) :=
-by induction n; [simp only [iterate_zero], simp only [iterate_succ', H, *]]
+by induction n; [simp only [iterate_zero, id], simp only [iterate_succ', (∘), H, *]]
 
 theorem iterate₂ {α : Type u} {op : α → α} {op' : α → α → α}
   (H : ∀ x y, op (op' x y) = op' (op x) (op y)) {n : ℕ} {x y : α} :
   op^[n] (op' x y) = op' (op^[n] x) (op^[n] y) :=
-by induction n; [simp only [iterate_zero], simp only [iterate_succ', H, *]]
+by induction n; [simp only [iterate_zero, id], simp only [iterate_succ', (∘), H, *]]
 
 theorem iterate_cancel {α : Type u} {op op' : α → α} (H : ∀ x, op (op' x) = x) {n : ℕ} {x : α} :
   op^[n] (op'^[n] x) = x :=
-by induction n; [refl, rwa [iterate_succ, iterate_succ', H]]
+by induction n; [refl, rwa [iterate_succ, iterate_succ', function.comp_apply, H]]
 
 end
 
@@ -1519,22 +1519,6 @@ by { rw [subsingleton.elim mn (le_trans (le_succ m) smn), decreasing_induction_t
          decreasing_induction_succ'] }
 
 end nat
-
-namespace function
-
-theorem injective.iterate {α : Type u} {op : α → α} (Hinj : injective op) :
-  ∀ n, injective (op^[n]) :=
-nat.iterate_ind op Hinj injective_id $ λ _ _, injective.comp
-
-theorem surjective.iterate {α : Type u} {op : α → α} (Hinj : surjective op) :
-  ∀ n, surjective (op^[n]) :=
-nat.iterate_ind op Hinj surjective_id $ λ _ _, surjective.comp
-
-theorem bijective.iterate {α : Type u} {op : α → α} (Hinj : bijective op) :
-  ∀ n, bijective (op^[n]) :=
-nat.iterate_ind op Hinj bijective_id $ λ _ _, bijective.comp
-
-end function
 
 namespace monoid_hom
 
