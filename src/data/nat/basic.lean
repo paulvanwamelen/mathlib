@@ -967,6 +967,8 @@ variables {α : Sort*} (op : α → α)
 
 @[simp] theorem iterate_succ (n : ℕ) : op^[succ n] = (op^[n]) ∘ op := rfl
 
+theorem iterate_succ_apply (n : ℕ) (x : α) : op^[succ n] x = (op^[n]) (op x) := rfl
+
 theorem iterate_add : ∀ (m n : ℕ), op^[m + n] = (op^[m]) ∘ (op^[n])
 | m 0 := rfl
 | m (succ n) := by rw [iterate_succ, iterate_succ, iterate_add]
@@ -975,6 +977,9 @@ theorem iterate_add : ∀ (m n : ℕ), op^[m + n] = (op^[m]) ∘ (op^[n])
 
 theorem iterate_succ' (n : ℕ) : op^[succ n] = op ∘ (op^[n]) :=
 by rw [← one_add, iterate_add, iterate_one]
+
+theorem iterate_succ_apply' (n : ℕ) (x : α) : op^[succ n] x = op (op^[n] x) :=
+by rw [iterate_succ']
 
 lemma iterate_mul (m : ℕ) : ∀ n, op^[m * n] = (op^[m]^[n])
 | 0 := by { ext a, simp only [mul_zero, iterate_zero] }
