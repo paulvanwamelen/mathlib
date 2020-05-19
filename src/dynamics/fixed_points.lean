@@ -8,6 +8,9 @@ import data.nat.basic
 /-!
 # Fixed and periodic points of a self-map
 
+In this file we define the following predicates in `function` namespace:
+
+* `is_fixed_pt f x := f x = x`
 -/
 
 universe u
