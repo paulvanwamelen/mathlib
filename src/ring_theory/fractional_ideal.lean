@@ -6,6 +6,7 @@ Authors: Anne Baanen
 Fractional ideals of an integral domain.
 -/
 import ring_theory.localization
+import ring_theory.principal_ideal_domain
 
 /-!
 # Fractional ideals
@@ -135,6 +136,8 @@ iff.intro (λ ⟨x', _, h⟩, ⟨x', h⟩) (λ ⟨x', h⟩, ⟨x', ⟨x', set.me
 
 lemma coe_mem_one (x : R) : (x : localization R S) ∈ (1 : fractional_ideal R S) :=
 mem_one_iff.mpr ⟨x, rfl⟩
+
+@[simp] lemma val_one : (1 : fractional_ideal R S).1 = (1 : ideal R) := rfl
 
 section lattice
 
@@ -277,7 +280,7 @@ instance comm_monoid : comm_monoid (fractional_ideal R S) :=
       erw [←y'_eq_y, mul_comm, coe_mul_eq_smul],
       exact submodule.smul _ _ hx },
     { have : x * 1 ∈ (I * 1) := mul_mem_mul h (coe_mem_one _),
-      simpa }
+      rwa [mul_one] at this }
   end,
   one_mul := λ I, begin
     ext,
@@ -287,7 +290,7 @@ instance comm_monoid : comm_monoid (fractional_ideal R S) :=
       erw [←x'_eq_x, coe_mul_eq_smul],
       exact submodule.smul _ _ hy },
     { have : 1 * x ∈ (1 * I) := mul_mem_mul (coe_mem_one _) h,
-      simpa }
+      rwa [one_mul] at this }
   end,
   ..fractional_ideal.has_mul,
   ..fractional_ideal.has_one }
@@ -307,7 +310,132 @@ instance comm_semiring : comm_semiring (fractional_ideal R S) :=
   right_distrib := λ I J K, ext (add_mul _ _ _),
   ..fractional_ideal.add_comm_monoid,
   ..fractional_ideal.comm_monoid }
+
 end semiring
+
+section smul
+
+variables {R' : Type*} [comm_ring R'] [algebra R R']
+
+local attribute [instance] smul_set_action
+
+open algebra
+
+-- TODO: figure out whether we want this instance elsewhere
+def submodule_has_scalar : has_scalar R' (submodule R R') :=
+⟨ λ x I, { carrier := x • I.carrier,
+           add := by { rintros y z ⟨y', hy', rfl⟩ ⟨z', hz', rfl⟩,
+                       rw ←smul_add,
+                       exact smul_mem_smul_set _ (I.add hy' hz') },
+           smul := by { rintros y z ⟨z', hz', rfl⟩,
+                        rw [smul_eq_mul, ←algebra.mul_smul_comm],
+                        exact smul_mem_smul_set _ (I.smul y hz')},
+           zero := by simpa only [smul_zero] using smul_mem_smul_set x I.zero } ⟩
+
+local attribute [instance] submodule_has_scalar
+
+lemma mem_smul_submodule (x y : R') (I : submodule R R') :
+  x ∈ y • I ↔ ∃ x' ∈ I, x = y * x' :=
+mem_smul_set y I.carrier x
+
+@[simp] lemma smul_one_submodule (x : R') :
+  (x • (1 : submodule R R')) = span R {x} :=
+begin
+  ext y,
+  refine ((mem_smul_set x _ y).trans ⟨_, _⟩).trans mem_span_singleton.symm;
+    simp_rw [smul_eq_mul, mul_comm x],
+  { rintros ⟨y', ⟨y', ⟨⟩, rfl⟩, rfl⟩,
+    exact ⟨y', smul_def y' x⟩ },
+  { rintros ⟨y', rfl⟩,
+    exact ⟨of_id R R' y', ⟨y', ⟨⟩, rfl⟩, smul_def y' x⟩ }
+end
+
+@[simp] lemma smul_top (x : localization R S) :
+  x • (↑(⊤ : ideal R) : submodule R (localization R S)) = span R {x} :=
+begin
+  ext y,
+  refine ((mem_smul_set x _ y).trans ⟨_, _⟩).trans mem_span_singleton.symm;
+  simp_rw [smul_eq_mul, mul_comm x],
+  { rintros ⟨y', ⟨y', ⟨⟩, rfl⟩, rfl⟩,
+    exact ⟨y', smul_def y' x⟩ },
+  { rintros ⟨y', rfl⟩,
+    exact ⟨y', ⟨y', ⟨⟩, rfl⟩, smul_def y' x⟩ }
+end
+
+lemma span_singleton_mul (x y : R') : (span R {x * y} : submodule R R') = x • span R {y} :=
+begin
+  ext z,
+  rw [mem_smul_submodule, mem_span_singleton],
+  split,
+  { rintros ⟨a, rfl⟩,
+    exact ⟨a • y, mem_span_singleton.mpr ⟨a, rfl⟩, (mul_smul_comm a x y).symm ⟩ },
+  { rintros ⟨x', h, rfl⟩,
+    obtain ⟨a, rfl⟩ := mem_span_singleton.mp h,
+    exact ⟨a, (mul_smul_comm a x y).symm⟩ }
+end
+
+lemma fractional_smul (x : localization R S) (I : fractional_ideal R S) :
+  is_fractional R S (x • I.1) := sorry -- TODO
+
+instance : has_scalar (localization R S) (fractional_ideal R S) :=
+{ smul := λ x I, ⟨ x • I.val, fractional_smul x I ⟩ }
+
+@[simp] lemma val_smul_ideal (x : localization R S) (I : fractional_ideal R S) :
+  (x • I).val = x • I.val :=
+rfl
+
+@[simp] lemma zero_smul_ideal (I : fractional_ideal R S) :
+  (0 : localization R S) • I = 0 :=
+begin
+  ext,
+  erw [val_smul_ideal, mem_smul_set, mem_zero_iff],
+  simp_rw [zero_smul],
+  exact ⟨ λ ⟨_, _, h⟩, h, λ h, ⟨0, I.val.zero, h⟩ ⟩
+end
+
+@[simp] lemma one_smul_ideal (I : fractional_ideal R S) : (1 : localization R S) • I = I :=
+begin
+  ext,
+  erw [val_smul_ideal, mem_smul_set],
+  simp_rw one_smul,
+  exact ⟨ λ ⟨_, hy, rfl⟩, hy, λ hx, ⟨x, hx, rfl⟩ ⟩
+end
+
+@[simp] lemma mul_smul_ideal (x y : localization R S) (I : fractional_ideal R S):
+  (x * y) • I = x • y • I :=
+begin
+  ext z,
+  simp_rw [val_smul_ideal],
+  split,
+  { rintros ⟨z', hz, rfl⟩,
+    rw mul_smul,
+    exact smul_mem_smul_set x (smul_mem_smul_set y hz) },
+  { rintros ⟨z', ⟨z'', hz, rfl⟩, rfl⟩,
+    rw ← mul_smul,
+    exact smul_mem_smul_set (x * y) hz }
+end
+
+-- TODO: finish this when localizations are more stable
+lemma exists_ideal_eq_smul (I : fractional_ideal R S) :
+  ∃ (a ≠ (0 : R)) (aI : ideal R), ↑aI = (a : localization R S) • I :=
+begin
+  obtain ⟨a, nonzero, ha⟩ := I.2,
+  refine ⟨a, nonzero, _, _⟩,
+  sorry,
+  sorry
+end
+
+lemma smul_one_mul_smul_one (x y : localization R S) :
+  (x • (1 : fractional_ideal R S)) * (y • 1) = (x * y) • 1 :=
+begin
+  ext z,
+  simp_rw [val_mul, val_smul_ideal, val_one, ideal.one_eq_top, smul_top, span_mul_span],
+  split; refine (λ h, span_mono _ h),
+  { exact (λ _ ⟨_, rfl, _, rfl, hxy⟩, hxy) },
+  { exact (λ _ hxy, ⟨_, rfl, _, rfl, hxy⟩ ) },
+end
+
+end smul
 
 section quotient
 
@@ -367,6 +495,10 @@ lemma inv_nonzero {I : fractional_ideal R (non_zero_divisors R)} (h : I ≠ 0) :
   I⁻¹ = ⟨(1 : fractional_ideal R _).val / I.1, fractional_div_of_nonzero h⟩ :=
 div_nonzero h
 
+lemma val_inv_of_nonzero {I : fractional_ideal R (non_zero_divisors R)} (h : I ≠ 0) :
+  I⁻¹.val = (1 : ideal R) / I.val :=
+by { rw [inv_nonzero h], refl }
+
 @[simp] lemma div_one {I : fractional_ideal R (non_zero_divisors R)} : I / 1 = I :=
 begin
   rw [div_nonzero (@one_ne_zero (fractional_ideal R _) _)],
@@ -405,7 +537,71 @@ begin
   exact submodule.mul_mem_mul hx hy
 end
 
+theorem mul_inv_cancel_iff {I : fractional_ideal R (non_zero_divisors R)} :
+  I * I⁻¹ = 1 ↔ ∃ J, I * J = 1 :=
+⟨λ h, ⟨I⁻¹, h⟩, λ ⟨J, hJ⟩, by rwa [←right_inverse_eq I J hJ]⟩
+
 end quotient
+
+section invertible_of_principal
+
+variables {R}
+
+open_locale classical
+
+open localization.fraction_ring
+open submodule submodule.is_principal
+
+lemma eq_generator_smul_one_of_principal (I : fractional_ideal R (non_zero_divisors R)) [is_principal I.1] :
+  I = (generator I.1) • 1 :=
+ext (by rw [val_smul_ideal, val_one, ideal.one_eq_top, smul_top, span_singleton_generator I.1])
+
+lemma invertible_of_principal (I : fractional_ideal R (non_zero_divisors R))
+  [submodule.is_principal I.1] (h : I ≠ 0) :
+  I * I⁻¹ = 1 :=
+begin
+  refine mul_inv_cancel_iff.mpr ⟨(generator I.1)⁻¹ • 1, _⟩,
+  -- Rewrite only the `I` that appears alone.
+  conv_lhs { congr, rw eq_generator_smul_one_of_principal I },
+  rw [smul_one_mul_smul_one, mul_inv_cancel, one_smul_ideal],
+  intro generator_I_eq_zero,
+  apply h,
+  rw [eq_generator_smul_one_of_principal I, generator_I_eq_zero, zero_smul_ideal]
+end
+
+lemma exists_eq_smul_ideal (I : fractional_ideal R (non_zero_divisors R)) :
+  ∃ (a : fraction_ring R) (aI : ideal R), I = a • aI :=
+begin
+  obtain ⟨a_inv, nonzero, aI, ha⟩ := exists_ideal_eq_smul I,
+  use [(a_inv : fraction_ring R)⁻¹, aI],
+  rw [ha, ←mul_smul_ideal, inv_mul_cancel, one_smul_ideal],
+  exact mt (eq_zero_of a_inv) nonzero
+end
+
+@[simp]
+lemma val_coe_ideal (I : ideal R) : (I : fractional_ideal R (non_zero_divisors R)).1 = I := rfl
+
+instance fractional_ideal.is_principal {R} [principal_ideal_domain R]
+  (I : fractional_ideal R (non_zero_divisors R)) : I.val.is_principal :=
+⟨ begin
+  obtain ⟨a, aI, ha⟩ := exists_eq_smul_ideal I,
+  use a * ↑(generator aI),
+  conv_lhs { rw [ha, val_smul_ideal, val_coe_ideal, ←span_singleton_generator aI] },
+  rw [span_singleton_mul],
+  congr,
+  ext,
+  split,
+  { rintros ⟨x', h, rfl⟩,
+    obtain ⟨a, rfl⟩ := mem_span_singleton.mp h,
+    refine mem_span_singleton.mpr ⟨a, _⟩,
+    rw [lin_coe_apply, smul_eq_mul, coe_mul, coe_mul_eq_smul] }, -- TODO: cleanup?
+  { rintros h,
+    obtain ⟨a, rfl⟩ := mem_span_singleton.mp h,
+    refine ⟨a * generator aI, mem_span_singleton.mpr ⟨a, rfl⟩, _⟩,
+    rw [lin_coe_apply, coe_mul, coe_mul_eq_smul] },
+end⟩
+
+end invertible_of_principal
 
 end fractional_ideal
 

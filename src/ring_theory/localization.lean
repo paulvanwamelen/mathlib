@@ -465,6 +465,9 @@ lemma mem_non_zero_divisors_iff_ne_zero {x : β} :
 ⟨λ hm hz, zero_ne_one (hm 1 $ by rw [hz, one_mul]).symm,
  λ hnx z, eq_zero_of_ne_zero_of_mul_eq_zero hnx⟩
 
+lemma zero_not_mem_non_zero_divisors : (0 : β) ∉ non_zero_divisors β :=
+λ h, mem_non_zero_divisors_iff_ne_zero.mp h rfl
+
 variables (β) [de : decidable_eq β]
 include de
 
@@ -669,6 +672,11 @@ begin
   use a * b',
   rw [←hb, ←coe_smul, smul_eq_mul]
 end
+
+-- TODO: prove this when the localization refactor is done
+lemma exists_integer_multiple (a : localization α S) :
+  ∃ (b : S), is_integer α S ((b : α) • a) :=
+sorry
 
 end is_integer
 

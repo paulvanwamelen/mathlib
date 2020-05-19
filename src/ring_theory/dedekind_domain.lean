@@ -13,6 +13,9 @@ namespace ring
 class dedekind_domain (R : Type u) extends integral_domain R :=
 (ideal_mul_inv_cancel : ∀ {I : fractional_ideal R (non_zero_divisors R)}, I ≠ 0 → I * I⁻¹ = 1)
 
-variables {R : Type u} [integral_domain R] {I : fractional_ideal R (non_zero_divisors R)}
+variables {R : Type u}
+
+instance [principal_ideal_domain R] : dedekind_domain R :=
+{ ideal_mul_inv_cancel := λ I hI, I.invertible_of_principal hI }
 
 end ring
