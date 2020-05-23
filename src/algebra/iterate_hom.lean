@@ -58,6 +58,10 @@ section semiring
 
 variables {R : Type*} [semiring R] (f : R →+* R) (n : ℕ) (x y : R)
 
+theorem iterate_map_one : f^[n] 1 = 1 := f.to_monoid_hom.iterate_map_one n
+
+theorem iterate_map_zero : f^[n] 0 = 0 := f.to_add_monoid_hom.iterate_map_zero n
+
 theorem iterate_map_add : f^[n] (x + y) = (f^[n] x) + (f^[n] y) :=
 f.to_add_monoid_hom.iterate_map_add n x y
 
